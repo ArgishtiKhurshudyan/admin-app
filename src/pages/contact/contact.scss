@@ -1,0 +1,48 @@
+.contactus {
+  display: flex;
+
+  .contactus-container {
+    flex: 6;
+
+    .contact-us {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 250px;
+
+      .form {
+        width: 700px;
+
+        .mix {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .inp-div {
+            display: flex;
+            flex-direction: column;
+
+            input {
+              width: 340px;
+              height: 45px;
+              border-radius: 10px;
+              border: 2px solid #d5d1dc;
+              outline: none
+            }
+          }
+        }
+        .textarea-div {
+          width: 100%;
+          textarea {
+            border: 2px solid #d5d1dc;
+            border-radius: 10px;
+            height: 152px;
+            outline: none;
+          }
+        }
+
+      }
+    }
+  }
+}

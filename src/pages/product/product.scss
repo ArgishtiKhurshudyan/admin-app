@@ -1,0 +1,19 @@
+.product {
+  display: flex;
+
+  .product-container {
+    flex: 6;
+
+    .create-product {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .product-table {
+        width:900px;
+        margin-top: 100px;
+      }
+
+    }
+  }
+}
