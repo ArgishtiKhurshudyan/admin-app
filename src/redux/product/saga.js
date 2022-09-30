@@ -2,6 +2,9 @@ import {call, put, takeLatest} from 'redux-saga/effects';
 import axios from 'axios'
 
 import {
+  findProductFailure,
+  findProductRequest,
+  findProductSuccess,
   getProductFailure,
   getProductStart,
   getProductSuccess,
@@ -80,9 +83,23 @@ function*  getProducts() {
   }
 }
 
+function*  findOneProduct({ payload }) {
+  try {
+    const response = yield call(() => axios.get(`http://localhost:5000/api/product/find/${payload}`, {headers: {"authorization": `Bearer ${token}`}}))
+    if (response?.status === 200) {
+      yield put(findProductSuccess(response.data.product));
+    }
+  } catch (e) {
+    if (e?.response?.data) {
+      yield put(findProductFailure(e?.response?.data?.message));
+    }
+  }
+}
+
 export default function* () {
   yield takeLatest(productStartCreate, createProduct);
   yield takeLatest(productDeleteStart, deleteProduct);
   yield takeLatest(productUpdateStart, updateProduct);
   yield takeLatest(getProductStart, getProducts);
+  yield takeLatest(findProductRequest, findOneProduct);
 }

@@ -12,6 +12,8 @@ import {useEffect} from "react";
 import {getLoginStart} from "./redux/user/actions";
 import publicRoutes from "./routes/publicRoutes";
 import privateRoutes from "./routes/privateRoutes";
+import Sidebar from "./components/sidebar/Sidebar";
+import Navbar from "./components/navbar/Navbar";
 
 
 function App() {
@@ -34,7 +36,13 @@ function App() {
   })
   return (
     <div className="App">
+
       <BrowserRouter>
+        {/*<Sidebar/>*/}
+        {/*<div className="navbar">*/}
+        {/*  <Navbar/>*/}
+        {/*</div>*/}
+
         <Routes>
           <Route path="/">
             {

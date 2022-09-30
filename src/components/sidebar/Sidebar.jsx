@@ -6,6 +6,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
+import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {Link, useNavigate} from "react-router-dom";
 
@@ -53,6 +54,12 @@ const Sidebar = () => {
             <Link to="/colors" style={style}>
               <ColorLensIcon className="icon"/>
               <span>Colors</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/settings" style={style}>
+              <SettingsIcon className="icon"/>
+              <span>Settings</span>
             </Link>
           </li>
           <li>

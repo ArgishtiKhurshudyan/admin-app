@@ -45,3 +45,7 @@ export const getProductSuccess = createAction(
 export const getProductFailure = createAction(
   "PRODUCT_GET_FAILURE"
 )
+
+export const findProductRequest = createAction('FIND_PRODUCT_REQUEST')
+export const findProductSuccess = createAction('FIND_PRODUCT_SUCCESS')
+export const findProductFailure = createAction('FIND_PRODUCT_FAILURE')

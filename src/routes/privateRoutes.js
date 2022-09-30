@@ -4,6 +4,8 @@ import {Navigate} from "react-router-dom";
 import Home from "../pages/home/home";
 import Profile from "../pages/profile/profile";
 import ContactUs from "../pages/contact/contactUs";
+import Setting from "../pages/settings/setting";
+import Edit from "../pages/product/edit";
 
 const routes = [
   {
@@ -41,13 +43,26 @@ const routes = [
     component: <ContactUs/>,
     permissions: []
   },
-
   {
     id: 6,
+    key: "setting",
+    path: '/settings',
+    component: <Setting/>,
+    permissions: []
+  },
+  {
+    id: 7,
+    path: '/product-detail/:id',
+    component: <Edit/>,
+    permissions: []
+  },
+  {
+    id: 8,
     path: '*',
     component: <Navigate to="/" replace/>,
     permissions: []
   },
+
 ]
 
 export default routes

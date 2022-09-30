@@ -1,0 +1,26 @@
+.setting {
+  display: flex;
+
+  .setting-container {
+    flex: 6;
+
+    .header {
+      background-color: #f2efff;
+      height: 45px;
+      display: flex;
+      align-items: center;
+
+      button {
+        margin: 5px;
+        background-color: transparent;
+        border: 1px solid #e1cee6;
+        color: #9c27b0;
+        transition: 0.5s ease;
+        &:hover {
+          transition: 0.5s ease;
+          background-color: #d5d1dc;
+        }
+      }
+    }
+  }
+}

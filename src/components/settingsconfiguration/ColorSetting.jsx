@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import "./color.scss"
+import "./colorsettin.scss"
 import {useDispatch, useSelector} from "react-redux";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -10,11 +10,10 @@ import {
   colorUpdateStart,
   getColorStart
 } from "../../redux/color/actions";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
+import Sidebar from "../sidebar/Sidebar";
+import Navbar from "../navbar/Navbar";
 
-
-const Color = () => {
+const ColorSetting = () => {
   const colorName = useRef()
   const [clicked, setClicked] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
@@ -67,36 +66,34 @@ const Color = () => {
   const onChangeVal = (val) => {
     setColor(val)
   }
+
+
   return (
-    <div className="color">
-      <Sidebar/>
       <div className="color-container">
-        <Navbar/>
         <h1>Colors</h1>
-        <div className="color-container">
-          {/*<div className="create-container">*/}
-          {/*  <input*/}
-          {/*    type="text"*/}
-          {/*    ref={colorName}*/}
-          {/*    placeholder="create color"*/}
-          {/*    required*/}
-          {/*  />*/}
-          {/*  <button onClick={handleCreateColor}>Add color</button>*/}
-          {/*</div>*/}
+          <div className="create-container">
+            <input
+              type="text"
+              ref={colorName}
+              placeholder="create color"
+              required
+            />
+            <button onClick={handleCreateColor}>Add color</button>
+          </div>
           <div className="colors">
             {/*<button className="getColors-btn" onClick={handleGetColor}>get colors</button>*/}
             {colorData?.map((item) =>
-              <div className="item" key={item.id} >
-                <div className="color-title-div"  style={{backgroundColor:item.colorName}}>
-                  <h1>&nbsp;&nbsp;{item.colorName}</h1>
-                  {/*<div className="changeBtn-div">*/}
-                  {/*  <button onClick={() =>*/}
-                  {/*    handleDeleteColor(item.id)}><DeleteForeverIcon style={{color: "#e28282"}}/>*/}
-                  {/*  </button>*/}
-                  {/*  <button onClick={() =>*/}
-                  {/*    handleEditColor(item.id)}><ModeEditIcon/>*/}
-                  {/*  </button>*/}
-                  {/*</div>*/}
+              <div className="item" key={item.id}>
+                <div className="color-title-div">
+                  <h1>color:&nbsp;&nbsp;{item.colorName}</h1>
+                  <div className="changeBtn-div">
+                    <button onClick={() =>
+                      handleDeleteColor(item.id)}><DeleteForeverIcon style={{color: "#e28282"}}/>
+                    </button>
+                    <button onClick={() =>
+                      handleEditColor(item.id)}><ModeEditIcon/>
+                    </button>
+                  </div>
                 </div>
                 {isEditing === item.id && <div className="editInput">
                   <input
@@ -111,10 +108,8 @@ const Color = () => {
               </div>
             )}
           </div>
-        </div>
-      </div>
     </div>
   );
 };
 
-export default Color;
+export default ColorSetting;

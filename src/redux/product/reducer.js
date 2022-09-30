@@ -12,7 +12,7 @@ import {
   productDeleteFailure,
   getProductStart,
   getProductSuccess,
-  getProductFailure,
+  getProductFailure, findProductRequest, findProductSuccess, findProductFailure,
 } from "./actions"
 
 
@@ -31,6 +31,10 @@ const initialState = {
   isProductGetFailure: false,
   data: [],
   errorMessage: '',
+  isGettingProduct: false,
+  isFoundProductSuccess: false,
+  isFoundProductFailure: false,
+  oneProduct: {}
 }
 
 
@@ -132,6 +136,24 @@ const reducer = handleActions({
       isProductGetSuccess: false,
       isProductGetFailure: true,
       errorMessage: payload.data
+    }),
+    [findProductRequest]: (state) => ({
+      ...state,
+      isGettingProduct: true,
+      isFoundProductSuccess: false,
+      isFoundProductFailure: false,
+    }),
+    [findProductSuccess]: (state, { payload }) => ({
+      ...state,
+      isGettingProduct: false,
+      isFoundProductSuccess: true,
+      oneProduct: payload
+    }),
+    [findProductFailure]: (state, { payload }) => ({
+      ...state,
+      isGettingProduct: false,
+      isFoundProductFailure: true,
+      errorMessage: payload
     }),
   },
   initialState
