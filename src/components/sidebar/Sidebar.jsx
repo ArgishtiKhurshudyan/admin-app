@@ -8,25 +8,21 @@ import ContactPageIcon from '@mui/icons-material/ContactPage';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const Sidebar = () => {
   const style = {
     textDecoration: "none"
   }
-  const navigate = useNavigate()
 
   const handleClick = () => {
     localStorage.removeItem("access_token")
     window.location.replace('/')
   }
 
-
   return (
     <div className='sidebar-container'>
-      {/*<div className="menu-icon"></div>*/}
       <div className="center">
-
         <ul>
           <div className="title">
             <h2>User name</h2>
@@ -74,7 +70,6 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
-
     </div>
   );
 };

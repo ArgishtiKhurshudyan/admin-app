@@ -28,7 +28,7 @@ const SignUp = () => {
       email: email.current.value,
       password: password.current.value,
     };
-    if(password.current.value.length === 8){
+    if (password.current.value.length === 8) {
       if (password.current.value === confirmPassword.current.value) {
         dispatch(getRegisterStart({user: user}))
       } else {

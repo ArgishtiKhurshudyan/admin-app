@@ -23,6 +23,10 @@
             display: flex;
             flex-direction: column;
 
+            .error {
+              border: 1px solid red;
+            }
+
             input {
               width: 340px;
               height: 45px;
@@ -32,8 +36,14 @@
             }
           }
         }
+
         .textarea-div {
           width: 100%;
+
+          .error {
+            border: 1px solid red;
+          }
+
           textarea {
             border: 2px solid #d5d1dc;
             border-radius: 10px;

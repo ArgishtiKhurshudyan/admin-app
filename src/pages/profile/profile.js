@@ -10,9 +10,9 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 const Profile = () => {
   return (
     <div className="profile">
-      {/*<Sidebar/>*/}
+      <Sidebar/>
       <div className="profile-container">
-        {/*<Navbar/>*/}
+        <Navbar/>
    <span style={{color:"#7451f8"}}>Profile</span>
         <div className="profile-img">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSztEHGDHsSIlKxW_dc1sltM6CBxFNT7ocBQ&usqp=CAU"/>

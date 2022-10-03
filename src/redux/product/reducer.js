@@ -80,7 +80,7 @@ const reducer = handleActions({
         isProductUpdatedStart: false,
         isProductUpdatedSuccess: true,
         isProductUpdatedFailure: false,
-        data:  updated
+        data: updated
       }
 
     },
@@ -143,13 +143,13 @@ const reducer = handleActions({
       isFoundProductSuccess: false,
       isFoundProductFailure: false,
     }),
-    [findProductSuccess]: (state, { payload }) => ({
+    [findProductSuccess]: (state, {payload}) => ({
       ...state,
       isGettingProduct: false,
       isFoundProductSuccess: true,
       oneProduct: payload
     }),
-    [findProductFailure]: (state, { payload }) => ({
+    [findProductFailure]: (state, {payload}) => ({
       ...state,
       isGettingProduct: false,
       isFoundProductFailure: true,

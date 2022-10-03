@@ -13,14 +13,11 @@ function* loginUser({payload}) {
   try {
     const response = yield call(() => axios.post("http://localhost:5000/api/auth/login", payload.credentials))
     if (response?.status === 200) {
-      console.log(response.data)
       localStorage.setItem("access_token", response.data.token)
       yield put(getLoginSuccess(response.data));
     } else {
       yield put(getLoginFailure(response.data.message));
-      console.log("response", response)
     }
-
   } catch (e) {
     if (e?.response?.data) {
       yield put(getLoginFailure(e?.response?.data?.message));
@@ -36,7 +33,6 @@ function* registerUser({payload}) {
     } else {
       yield put(getRegisterFailure(response.data.message));
     }
-    console.log(response)
   } catch (e) {
     if (e?.response?.data) {
       yield put(getRegisterFailure(e?.response?.data?.message));

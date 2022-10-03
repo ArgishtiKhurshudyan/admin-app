@@ -6,7 +6,7 @@ const routes = [
   {
     id: 1,
     key: "login",
-    path: '/',
+    path: '/login',
     component: <SignIn />,
     permissions: []
   },

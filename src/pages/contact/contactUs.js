@@ -4,7 +4,6 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import ColorButtons from "../../muitable/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {productStartCreate} from "../../redux/product/actions";
 import {messageStartCreate} from "../../redux/contactus/actions";
 
 const ContactUs = () => {
@@ -12,10 +11,9 @@ const ContactUs = () => {
     username: "",
     email: "",
     message: ""
-
   })
 
-  const {messageData, messageSuccess, isMessageCreatedSuccess} = useSelector(state => state.message)
+  const {messageSuccess, isMessageCreatedSuccess} = useSelector(state => state.message)
   const dispatch = useDispatch()
 
   const handleCreate = () => {
@@ -26,21 +24,15 @@ const ContactUs = () => {
     }
     if (message.username && message.email && message.message) {
       dispatch(messageStartCreate({messages}))
-
       if (isMessageCreatedSuccess) {
-        alert(messageSuccess)
+        alert("your message success")
       }
-    }
-
-
       setMessage({
         username: "",
         email: "",
         message: ""
-
       })
-
-
+    }
   }
 
   const handleChange = (field, value) => {
@@ -65,23 +57,22 @@ const ContactUs = () => {
                   type="text"
                   placeholder="username"
                   required
+                  name="text"
                   value={message.username}
                   onChange={(e) => handleChange("username", e.target.value)}
                 />
               </div>
-
               <div className="inp-div">
                 <label>Email</label>
                 <input
-                  type="text"
+                  type="email"
                   placeholder="email"
-                  required
                   value={message.email}
                   onChange={(e) => handleChange("email", e.target.value)}
+                  required
                 />
               </div>
             </div>
-
             <div className="textarea-div">
               <label>Your text</label>
               <textarea

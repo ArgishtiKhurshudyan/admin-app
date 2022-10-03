@@ -15,8 +15,9 @@ import {
   getColorStart, getColorSuccess,
 } from "./actions"
 
+const token = localStorage.getItem('access_token')
+
 function* createColor({payload}) {
-  const token = localStorage.getItem('access_token')
   try {
     const response = yield call(() => axios.post("http://localhost:5000/api/color", payload.color, {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {
@@ -24,7 +25,6 @@ function* createColor({payload}) {
     } else {
       yield put(colorCreateFailure(response.data.message));
     }
-    console.log(response)
   } catch (e) {
     if (e?.response?.data) {
       yield put(colorCreateFailure(e?.response?.data?.message));
@@ -37,11 +37,9 @@ function* updateColor({payload}) {
     const response = yield call(() => axios.put(`http://localhost:5000/api/color/${payload.id}`, {colorName: payload.colorName}))
     if (response?.status === 201) {
       yield put(colorUpdateSuccess(payload));
-      console.log('response.data', response.data)
     } else {
       yield put(colorUpdateFailure(response.data.message));
     }
-    console.log(response)
   } catch (e) {
     if (e?.response?.data) {
       yield put(colorUpdateFailure(e?.response?.data?.message));
@@ -50,7 +48,6 @@ function* updateColor({payload}) {
 }
 
 function* deleteColor({payload}) {
-  const token = localStorage.getItem('access_token')
   try {
     const response = yield call(() => axios.delete(`http://localhost:5000/api/color/${payload.id}`, {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {
@@ -67,16 +64,13 @@ function* deleteColor({payload}) {
 }
 
 function* getColors({payload}) {
-  const token = localStorage.getItem('access_token')
   try {
     const response = yield call(() => axios.get(" http://localhost:5000/api/color", {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {
-      console.log('response.data', response.data)
       yield put(getColorSuccess(response.data));
     } else {
       yield put(getColorFailure(response.data.message));
     }
-    console.log(response)
   } catch (e) {
     if (e?.response?.data) {
       yield put(getColorFailure(e?.response?.data?.message));

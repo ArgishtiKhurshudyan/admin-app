@@ -11,13 +11,12 @@ import Modal from "../Modal";
 import {getColorStart} from "../../redux/color/actions";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import {Link} from "react-router-dom";
 
 const ProductModal = () => {
   const [isClick, setIsClick] = useState(false)
   const [isEditing, setIsEditing] = useState("")
-  const [target, setTarget] = useState(false)
   const [colors, setColors] = useState([])
+  const [err, setErr] = useState(false)
   const [changeProduct, setChangeProduct] = useState("")
   const [product, setProduct] = useState('')
   const [formData, setFormData] = useState({
@@ -25,7 +24,7 @@ const ProductModal = () => {
     colors: []
   })
   const dispatch = useDispatch();
-  const {data, isProductGetSuccess} = useSelector(state => state.product)
+  const {data, isProductGetSuccess, isProductCreatedSuccess} = useSelector(state => state.product)
   const {colorData} = useSelector(state => state.color)
 
   useEffect(() => {
@@ -37,15 +36,24 @@ const ProductModal = () => {
   }, [])
 
   const handleCreate = () => {
-
     const product = {
       productName: formData.productName,
       colors: formData.colors,
     }
+
     if (formData.productName) {
       dispatch(productStartCreate({product: product}))
       setIsClick(true)
+      if(isProductCreatedSuccess) {
+        alert("product is created")
+      }
     }
+    if (!formData['productName'].length) {
+      setErr(true)
+    }else {
+      setErr(false)
+    }
+
     return {
       fromData: formData.productName = "",
       colorData: formData.colors = []
@@ -56,12 +64,6 @@ const ProductModal = () => {
     dispatch(productDeleteStart({id}))
   }
 
-  // const handleGet = () => {
-  //   dispatch(getProductStart())
-  //   setIsClick(true)
-  //
-  // }
-
   const handleEditProduct = (id) => {
     setIsEditing(id)
     const prod = data?.find((item) => item.id === id)
@@ -70,7 +72,6 @@ const ProductModal = () => {
 
   const handleUpdate = (id) => {
     setIsEditing('')
-    console.log('product', product)
     const payload = {
       id: id,
       productName: product
@@ -108,6 +109,7 @@ const ProductModal = () => {
             placeholder="product name"
             value={formData['productName']}
             required
+            className={err  && "error"}
             onChange={(e) => handleChange('productName', e.target.value)}
           />
           <button className="create-btn-prod" onClick={handleCreate}>create</button>
@@ -129,10 +131,8 @@ const ProductModal = () => {
 
         <div className="products">
           <h3 style={{color: "white"}}>Created products</h3>
-          {/*<button className="get-btn-prod" onClick={handleGet}>get</button>*/}
           {data?.map((item) => (
               <div className="items-div">
-
                 <div className="items">
                   <div>
                     <span>product: {item?.productName}</span>

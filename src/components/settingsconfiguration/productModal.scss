@@ -7,7 +7,9 @@
   .product-create {
     width: 250px;
     height: 120px;
-
+.error {
+  border: 1px solid red;
+}
     input {
       height: 35px;
       border: 2px solid #545353;
@@ -44,10 +46,8 @@
             color: aliceblue;
           }
         }
-
       }
     }
-
   }
   .products {
     width: 450px;
@@ -79,13 +79,6 @@
         justify-content: space-between;
         color: white;
 
-        //input {
-        //  height: 35px;
-        //}
-        //button {
-        //  height: 40px;
-        //  cursor:pointer;
-        //}
         .change-btn {
           button {
             border: none;

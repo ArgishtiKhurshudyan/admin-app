@@ -1,12 +1,5 @@
-// import Home from "./pages/home/home";
 import './app.scss'
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-// import Profile from "./pages/profile/profile";
-// import Product from "./pages/product/product";
-// import ContactUs from "./pages/contact/contactUs";
-// import Login from "./pages/auth/login";
-// import Register from "./pages/auth/register";
-// import Color from "./pages/color/color";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getLoginStart} from "./redux/user/actions";
@@ -19,7 +12,6 @@ import Navbar from "./components/navbar/Navbar";
 function App() {
   const token = localStorage.getItem('access_token')
   const dispatch = useDispatch()
-
 
   useEffect(() => {
     if (token) {
@@ -36,13 +28,7 @@ function App() {
   })
   return (
     <div className="App">
-
       <BrowserRouter>
-        {/*<Sidebar/>*/}
-        {/*<div className="navbar">*/}
-        {/*  <Navbar/>*/}
-        {/*</div>*/}
-
         <Routes>
           <Route path="/">
             {
@@ -62,10 +48,3 @@ function App() {
 
 export default App;
 
-// <Route index element={<Home/>}/>
-// <Route path="profile" element={<Profile/>}/>
-// <Route path="products" element={<Product/>}/>
-// <Route path="colors" element={<Color/>}/>
-// <Route path="contact" element={<ContactUs/>}/>
-// <Route path="login" element={<Login/>}/>
-// <Route path="register" element={<Register/>}/>

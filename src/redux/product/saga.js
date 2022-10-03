@@ -30,7 +30,6 @@ function* createProduct({payload}) {
     } else {
       yield put(productCreateFailure(response.data.message));
     }
-    console.log(response)
   } catch (e) {
     if (e?.response?.data) {
       yield put(productCreateFailure(e?.response?.data?.message));
@@ -45,7 +44,6 @@ function* deleteProduct({payload}) {
     } else {
       yield put(productDeleteFailure(response.data.message));
     }
-    console.log(response)
   } catch (e) {
     if (e?.response?.data) {
       yield put(productDeleteFailure(e?.response?.data?.message));
@@ -60,7 +58,6 @@ function* updateProduct({payload}) {
     } else {
       yield put(productUpdateFailure(response.data.message));
     }
-    console.log(response)
   } catch (e) {
     if (e?.response?.data) {
       yield put(productUpdateFailure(e?.response?.data?.message));
@@ -75,7 +72,6 @@ function*  getProducts() {
     } else {
       yield put(getProductFailure(response.data.message));
     }
-    console.log(response)
   } catch (e) {
     if (e?.response?.data) {
       yield put(getProductFailure(e?.response?.data?.message));
