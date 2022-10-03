@@ -40,7 +40,8 @@ const SignUp = () => {
   }
   useEffect(() => {
     if (isRegisterSuccess) {
-      navigate("/")
+      alert("Register Success")
+      navigate("/login")
     }
   }, [isRegisterSuccess])
 
@@ -107,7 +108,6 @@ const SignUp = () => {
               {openIcon ? <RemoveRedEyeIcon/> : <VisibilityOffIcon/>}
             </div>
           </div>
-
           <button type="submit">Submit</button>
           <Link to="/login" style={{textDecoration: "none", color: "blue", fontWeight: "600"}}>signIn</Link>
           <div style={{color: "red"}}>{message}</div>
