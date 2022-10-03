@@ -17,7 +17,7 @@ const Sidebar = () => {
 
   const handleClick = () => {
     localStorage.removeItem("access_token")
-    window.location.replace('/')
+    window.location.replace('/login')
   }
 
   return (
