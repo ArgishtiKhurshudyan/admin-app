@@ -1,31 +1,71 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import '../../app.scss'
-import {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
-import {findProductRequest} from "../../redux/product/actions";
+import {useNavigate, useParams} from "react-router-dom";
+import {findProductRequest, productDeleteStart} from "../../redux/product/actions";
 import {Alert} from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import Modal from "../../components/Modal";
 
-const Edit =() => {
-  const { id } = useParams();
+const Edit = () => {
+  const [isEditing, setIsEditing] = useState()
+  const {id} = useParams();
   const dispatch = useDispatch()
-  const { oneProduct } = useSelector(state => state.product)
+  const {oneProduct} = useSelector(state => state.product)
+  const navigate = useNavigate()
+
   useEffect(() => {
     dispatch(findProductRequest(id))
   }, [dispatch, id])
+
+
+  const handleDelete = (id) => {
+    dispatch(productDeleteStart({id}))
+    navigate('/products')
+  }
+
+  const handleEditProduct = (id) => {
+    setIsEditing(!isEditing)
+  }
 
   return <div className='edit-page'>
     <Sidebar/>
     <div className="sido">
       <Navbar/>
+      <h3>Product details</h3>
       <Alert>{oneProduct.productName}</Alert>
       {oneProduct?.colors?.map(i => {
         return <Alert>{i.colorName}</Alert>
       })
       }
+      <div className="products">
+        <div className="items">
+          <div>
+            <span>product: {oneProduct.productName}</span>
+            <div> color:{
+              oneProduct?.colors?.map((color) => {
+                return (
+                  <span style={{margin: "5px"}}>{
+                    color?.colorName
+                  }</span>
+                )
+              })
+            }
+            </div>
+          </div>
+          <div className="change-btn">
+            <button onClick={() => handleDelete(oneProduct.id)}><DeleteForeverIcon style={{color: "#e28282"}}/></button>
+            <button onClick={() => handleEditProduct(oneProduct.id)}><ModeEditIcon style={{color: "white"}}/></button>
+          </div>
+        </div>
+        {isEditing &&
+        <Modal item={oneProduct} setIsEditing={setIsEditing}/>
+        }
+      </div>
     </div>
-
   </div>
 }
 export default Edit

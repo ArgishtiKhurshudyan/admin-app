@@ -1,7 +1,6 @@
 import SignIn from "../pages/auth/login";
 import SignUp from "../pages/auth/register";
 
-
 const routes = [
   {
     id: 1,

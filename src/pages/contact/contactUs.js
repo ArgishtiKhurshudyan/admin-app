@@ -3,8 +3,9 @@ import "./contact.scss"
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import ColorButtons from "../../muitable/Button";
-import {useDispatch, useSelector} from "react-redux";
-import {messageStartCreate} from "../../redux/contactus/actions";
+import {useDispatch} from "react-redux";
+import {messageCreateSuccess, messageStartCreate} from "../../redux/contactus/actions";
+import {useNavigate} from "react-router-dom";
 
 const ContactUs = () => {
   const [message, setMessage] = useState({
@@ -12,10 +13,8 @@ const ContactUs = () => {
     email: "",
     message: ""
   })
-
-  const {isMessageCreatedSuccess} = useSelector(state => state.message)
   const dispatch = useDispatch()
-
+const navigate = useNavigate()
   const handleCreate = () => {
     const messages = {
       username: message.username,
@@ -24,8 +23,9 @@ const ContactUs = () => {
     }
     if (message.username && message.email && message.message) {
       dispatch(messageStartCreate({messages}))
-      if (isMessageCreatedSuccess) {
+      if (messageCreateSuccess) {
         alert("your message success")
+        navigate("/")
       }
       setMessage({
         username: "",

@@ -12,8 +12,6 @@ function* createMessage({payload}) {
     const response = yield call(() => axios.post("http://localhost:5000/api/message", payload.messages, {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {
       yield put(messageCreateSuccess(response.data));
-    } else {
-      yield put(messageCreateFailure(response.data.message));
     }
   } catch (e) {
     if (e?.response?.data) {

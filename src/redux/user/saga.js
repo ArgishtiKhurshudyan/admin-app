@@ -15,8 +15,6 @@ function* loginUser({payload}) {
     if (response?.status === 200) {
       localStorage.setItem("access_token", response.data.token)
       yield put(getLoginSuccess(response.data));
-    } else {
-      yield put(getLoginFailure(response.data.message));
     }
   } catch (e) {
     if (e?.response?.data) {
@@ -30,8 +28,6 @@ function* registerUser({payload}) {
     const response = yield call(() => axios.post("http://localhost:5000/api/auth/register", payload.user))
     if (response?.status === 200) {
       yield put(getRegisterSuccess(response.data));
-    } else {
-      yield put(getRegisterFailure(response.data.message));
     }
   } catch (e) {
     if (e?.response?.data) {

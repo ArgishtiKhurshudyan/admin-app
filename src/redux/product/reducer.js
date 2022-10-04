@@ -72,17 +72,12 @@ const reducer = handleActions({
     }),
 
     [productUpdateSuccess]: (state, {payload}) => {
-      const updated = [...state.data]
-      const updatedIndex = state.data.findIndex((el) => el.id === payload.id)
-      updated[updatedIndex] = {...updated[updatedIndex], ...payload}
       return {
         ...state,
         isProductUpdatedStart: false,
         isProductUpdatedSuccess: true,
-        isProductUpdatedFailure: false,
-        data: updated
+        oneProduct: payload
       }
-
     },
 
     [productUpdateFailure]: (state, {payload}) => ({

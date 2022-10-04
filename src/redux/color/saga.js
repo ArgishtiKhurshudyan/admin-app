@@ -22,8 +22,6 @@ function* createColor({payload}) {
     const response = yield call(() => axios.post("http://localhost:5000/api/color", payload.color, {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {
       yield put(colorCreateSuccess(response.data));
-    } else {
-      yield put(colorCreateFailure(response.data.message));
     }
   } catch (e) {
     if (e?.response?.data) {
@@ -37,8 +35,6 @@ function* updateColor({payload}) {
     const response = yield call(() => axios.put(`http://localhost:5000/api/color/${payload.id}`, {colorName: payload.colorName}))
     if (response?.status === 201) {
       yield put(colorUpdateSuccess(payload));
-    } else {
-      yield put(colorUpdateFailure(response.data.message));
     }
   } catch (e) {
     if (e?.response?.data) {
@@ -52,11 +48,8 @@ function* deleteColor({payload}) {
     const response = yield call(() => axios.delete(`http://localhost:5000/api/color/${payload.id}`, {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {
       yield put(colorDeleteSuccess(payload.id));
-    } else {
-      yield put(colorDeleteFailure(response.data.message));
     }
-    console.log(response)
-  } catch (e) {
+    } catch (e) {
     if (e?.response?.data) {
       yield put(colorDeleteFailure(e?.response?.data?.message));
     }
@@ -68,8 +61,6 @@ function* getColors({payload}) {
     const response = yield call(() => axios.get(" http://localhost:5000/api/color", {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {
       yield put(getColorSuccess(response.data));
-    } else {
-      yield put(getColorFailure(response.data.message));
     }
   } catch (e) {
     if (e?.response?.data) {

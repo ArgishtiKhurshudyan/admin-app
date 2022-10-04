@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './sidebar.scss'
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
@@ -10,13 +10,33 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import {Link} from "react-router-dom";
 
 const Sidebar = () => {
+  const [dialog, setDialog] = useState({
+    message: "Are you sure?",
+    yesConfirm: false,
+    notConfirm: false
+  })
+  const [click, setClick] = useState(false)
+
   const style = {
     textDecoration: "none"
   }
+  useEffect(() => {
+    if (dialog.yesConfirm) {
+      localStorage.removeItem("access_token")
+      window.location.replace('/login')
+    } else {
+      setClick(false)
+    }
+  }, [dialog])
 
+  const handleConfirm = (field, value) => {
+    setDialog(prevState => ({
+      ...prevState,
+      [field]: value
+    }))
+  }
   const handleClick = () => {
-    localStorage.removeItem("access_token")
-    window.location.replace('/login')
+    setClick(true)
   }
 
   return (
@@ -67,6 +87,14 @@ const Sidebar = () => {
             <LogoutIcon className="icon"/>
             <span onClick={handleClick}>Log out</span>
           </li>
+
+          {click && <li>
+            <span>{dialog.message}</span>
+            <div className="btn">
+              <button key={1} onClick={(e) => handleConfirm('yesConfirm', !dialog.yesConfirm)}>Yes</button>
+              <button key={2} onClick={(e) => handleConfirm('notConfirm', dialog.notConfirm)}>No</button>
+            </div>
+          </li>}
         </ul>
       </div>
     </div>

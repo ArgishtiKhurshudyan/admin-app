@@ -7,9 +7,17 @@ import ColorSetting from "../../components/settingsconfiguration/ColorSetting";
 
 
 const Setting = () => {
-  const [prod, setProd] = useState(false)
-  const [color, setColor] = useState(false)
+  const [prod, setProd] = useState({
+    product: false,
+    color: false
+  })
 
+  const handleChange = (field, value) => {
+    setProd(prevState => ({
+      ...prevState,
+      [field]: value
+    }))
+  }
 
   return (
     <div className="setting">
@@ -17,12 +25,12 @@ const Setting = () => {
       <div className="setting-container">
         <Navbar/>
         <div className="header">
-          <button onClick={() => setProd(!prod)}>product</button>
-          <button onClick={() => setColor(!color)}>color</button>
+          <button onClick={() => handleChange('product', !prod.product)}>product</button>
+          <button onClick={() => handleChange('color', !prod.color)}>color</button>
         </div>
         <>
           {
-            prod ?  <ProductModal/> : color ? <ColorSetting/> : <></>
+            prod.product ? <ProductModal/> : prod.color ? <ColorSetting/> : <></>
           }
         </>
       </div>

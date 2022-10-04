@@ -7,7 +7,6 @@ import {
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 
-
 const Color = () => {
   const {colorData} = useSelector(state => state.color)
   const dispatch = useDispatch()

@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import {
+  colorCreateSuccess,
   colorDeleteStart,
   colorStartCreate,
   colorUpdateStart,
@@ -16,7 +17,7 @@ const ColorSetting = () => {
   const [changeColor, setChangeColor] = useState()
   const [err, setErr] = useState(false)
   const [color, setColor] = useState('')
-  const {colorData, isColorCreatedSuccess} = useSelector(state => state.color)
+  const {colorData} = useSelector(state => state.color)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -29,16 +30,15 @@ const ColorSetting = () => {
     }
     if (colorName.current.value) {
       dispatch(colorStartCreate({color}))
-      if (isColorCreatedSuccess) {
+      if (colorCreateSuccess()) {
         alert("color has been created")
       }
     }
     if (!colorName.current.value) {
       setErr(true)
-    }else {
+    } else {
       setErr(false)
     }
-
     return colorName.current.value = ''
   }
 
