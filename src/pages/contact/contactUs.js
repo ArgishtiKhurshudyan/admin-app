@@ -13,7 +13,7 @@ const ContactUs = () => {
     message: ""
   })
 
-  const {messageSuccess, isMessageCreatedSuccess} = useSelector(state => state.message)
+  const {isMessageCreatedSuccess} = useSelector(state => state.message)
   const dispatch = useDispatch()
 
   const handleCreate = () => {

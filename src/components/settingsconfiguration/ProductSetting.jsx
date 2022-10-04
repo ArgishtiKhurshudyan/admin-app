@@ -14,9 +14,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const ProductModal = () => {
   const [isClick, setIsClick] = useState(false)
-  const [isEditing, setIsEditing] = useState("")
-  const [colors, setColors] = useState([])
+  const [isEditing, setIsEditing] = useState()
   const [err, setErr] = useState(false)
+  const [setColors] = useState([])
   const [changeProduct, setChangeProduct] = useState("")
   const [product, setProduct] = useState('')
   const [formData, setFormData] = useState({
@@ -24,16 +24,16 @@ const ProductModal = () => {
     colors: []
   })
   const dispatch = useDispatch();
-  const {data, isProductGetSuccess, isProductCreatedSuccess} = useSelector(state => state.product)
+  const {data,  isProductCreatedSuccess} = useSelector(state => state.product)
   const {colorData} = useSelector(state => state.color)
 
   useEffect(() => {
     dispatch(getColorStart())
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     dispatch(getProductStart())
-  }, [])
+  }, [dispatch])
 
   const handleCreate = () => {
     const product = {
@@ -44,13 +44,13 @@ const ProductModal = () => {
     if (formData.productName) {
       dispatch(productStartCreate({product: product}))
       setIsClick(true)
-      if(isProductCreatedSuccess) {
+      if (isProductCreatedSuccess) {
         alert("product is created")
       }
     }
     if (!formData['productName'].length) {
       setErr(true)
-    }else {
+    } else {
       setErr(false)
     }
 
@@ -68,21 +68,22 @@ const ProductModal = () => {
     setIsEditing(id)
     const prod = data?.find((item) => item.id === id)
     setChangeProduct(prod.productName)
+
   }
 
   const handleUpdate = (id) => {
     setIsEditing('')
     const payload = {
       id: id,
-      productName: product
+      productName: product,
     }
     dispatch(productUpdateStart(payload))
-
   }
 
   const changeVal = (val) => {
     setProduct(val)
     setChangeProduct('')
+
   }
 
   const handleChange = (field, value) => {
@@ -109,7 +110,7 @@ const ProductModal = () => {
             placeholder="product name"
             value={formData['productName']}
             required
-            className={err  && "error"}
+            className={err && "error"}
             onChange={(e) => handleChange('productName', e.target.value)}
           />
           <button className="create-btn-prod" onClick={handleCreate}>create</button>
@@ -153,7 +154,8 @@ const ProductModal = () => {
                   </div>
                 </div>
                 {isEditing === item.id &&
-                <Modal changeProduct={changeProduct}  changeVal={changeVal} handleUpdate={handleUpdate} item={item}/>
+                <Modal changeProduct={changeProduct}
+                       changeVal={changeVal} handleUpdate={handleUpdate} item={item}/>
                 }
               </div>
             )

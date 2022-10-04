@@ -5,9 +5,11 @@ import Navbar from "../../components/navbar/Navbar";
 import ProductModal from "../../components/settingsconfiguration/ProductSetting";
 import ColorSetting from "../../components/settingsconfiguration/ColorSetting";
 
+
 const Setting = () => {
   const [prod, setProd] = useState(false)
   const [color, setColor] = useState(false)
+
 
   return (
     <div className="setting">
@@ -24,6 +26,7 @@ const Setting = () => {
           }
         </>
       </div>
+
     </div>
   );
 };

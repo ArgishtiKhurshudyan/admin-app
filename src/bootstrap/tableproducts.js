@@ -6,13 +6,13 @@ import {useNavigate} from 'react-router-dom';
 
 
 export default function ProductsTable() {
-  const {data, isProductGetSuccess} = useSelector(state => state.product)
+  const {data} = useSelector(state => state.product)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getProductStart())
-  }, [])
+  }, [dispatch])
 
   const handleEdit = (id) => {
     navigate(`/product-detail/${id}`)

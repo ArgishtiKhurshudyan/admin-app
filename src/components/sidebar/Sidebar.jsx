@@ -1,6 +1,5 @@
 import React from 'react';
 import './sidebar.scss'
-import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';

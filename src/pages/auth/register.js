@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import "./style.scss"
 import {useDispatch, useSelector} from "react-redux";
 import {getRegisterStart} from "../../redux/user/actions";
@@ -7,55 +7,68 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const SignUp = () => {
-  const [closeIcon, setCloseIcon] = useState(false)
-  const [openIcon, setOpenIcon] = useState(false)
-  const firstName = useRef()
-  const lastName = useRef()
-  const email = useRef()
-  const password = useRef()
-  const confirmPassword = useRef()
+  const [icon, setIcon] = useState({
+    password: false,
+    confirmPassword: false
+  })
+  const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
+
   const dispatch = useDispatch()
   const {isRegisterFailure, isRegisterSuccess, errorMessage} = useSelector(state => state.user)
   const [message, setMessage] = useState(errorMessage)
-
   const navigate = useNavigate()
 
   const handleClick = async (e) => {
     e.preventDefault()
     const user = {
-      firstName: firstName.current.value,
-      lastName: lastName.current.value,
-      email: email.current.value,
-      password: password.current.value,
-    };
-    if (password.current.value.length === 8) {
-      if (password.current.value === confirmPassword.current.value) {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password
+    }
+    if (data.password.length >= 8) {
+      if (data.password === data.confirmPassword) {
         dispatch(getRegisterStart({user: user}))
       } else {
         setMessage("confirm password is wrong")
       }
     } else {
-      setMessage("password must be 8 digits")
+      setMessage("password must be min 8 digits")
     }
   }
+
+  const handleChange = (field, value) => {
+    setData(prevState => ({
+      ...prevState,
+      [field]: value
+    }))
+  }
+
   useEffect(() => {
     if (isRegisterSuccess) {
       alert("Register Success")
       navigate("/login")
     }
-  }, [isRegisterSuccess])
+  }, [isRegisterSuccess, navigate])
 
   useEffect(() => {
     if (isRegisterFailure) {
       setMessage(errorMessage)
     }
-  }, [isRegisterFailure])
+  }, [isRegisterFailure, errorMessage])
 
-  const handleClickIcon = (e) => {
-    setCloseIcon(!closeIcon)
-  }
-  const handleClickOpenIcon = (e) => {
-    setOpenIcon(!openIcon)
+
+  const handleChangeIcon = (field, value) => {
+    setIcon(prevState => ({
+      ...prevState,
+      [field]: value
+    }))
   }
 
   return (
@@ -64,16 +77,16 @@ const SignUp = () => {
         <form onSubmit={handleClick} className="register-form">
           <label id="name" className="reg-label">First Name</label>
           <input
-            id="name"
-            ref={firstName}
+            value={data.firstName}
+            onChange={(e) => handleChange("firstName", e.target.value)}
             type="text"
             placeholder="firstName"
             required
           />
           <label id="name" className="reg-label">Last Name</label>
           <input
-            id="name"
-            ref={lastName}
+            value={data.lastName}
+            onChange={(e) => handleChange("lastName", e.target.value)}
             type="text"
             placeholder="lastName"
             required
@@ -81,31 +94,36 @@ const SignUp = () => {
           <label className="reg-label">Email</label>
           <input
             type="email"
-            ref={email}
+            value={data.email}
+            onChange={(e) => handleChange("email", e.target.value)}
             placeholder="email"
             required
           />
           <div className="closeIcon">
             <label className="reg-label">Password</label>
             <input
-              type={closeIcon ? "text" : "password"}
-              ref={password}
+              type={icon.password ? "text" : "password"}
               placeholder="password"
+              value={data.password}
+              onChange={(e) => handleChange("password", e.target.value)}
               required
             />
-            <div onClick={handleClickIcon} className="icon">{closeIcon ? <RemoveRedEyeIcon/> :
-              <VisibilityOffIcon/>}</div>
+            <div onClick={(e) => handleChangeIcon('password', !icon.password)} className="icon">{
+              icon.password ? <RemoveRedEyeIcon/> : <VisibilityOffIcon/>
+            }
+            </div>
           </div>
           <div className="closeIcon">
             <label className="reg-label">Confirm password</label>
             <input
-              type={openIcon ? "text" : "password"}
-              ref={confirmPassword}
+              type={icon.confirmPassword ? "text" : "password"}
               placeholder="confirm password"
+              value={data.confirmPassword}
+              onChange={(e) => handleChange("confirmPassword", e.target.value)}
               required
             />
-            <div onClick={handleClickOpenIcon} className="icon">
-              {openIcon ? <RemoveRedEyeIcon/> : <VisibilityOffIcon/>}
+            <div onClick={(e) => handleChangeIcon('confirmPassword', !icon.confirmPassword)} className="icon">
+              {icon.confirmPassword ? <RemoveRedEyeIcon/> : <VisibilityOffIcon/>}
             </div>
           </div>
           <button type="submit">Submit</button>

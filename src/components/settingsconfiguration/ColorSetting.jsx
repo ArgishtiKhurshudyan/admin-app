@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from "react-redux";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import {
-  colorCreateSuccess,
   colorDeleteStart,
   colorStartCreate,
   colorUpdateStart,
@@ -22,7 +21,7 @@ const ColorSetting = () => {
 
   useEffect(() => {
     dispatch(getColorStart())
-  }, [])
+  }, [dispatch])
 
   const handleCreateColor = () => {
     let color = {

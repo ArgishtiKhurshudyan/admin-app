@@ -34,7 +34,7 @@ const SignIn = () => {
     if (isLoginFailure) {
       setMessage(errorMessage);
     }
-  }, [isLoginFailure])
+  }, [isLoginFailure, errorMessage])
 
   const handleClickIcon = (e) => {
     setCloseIcon(!closeIcon)

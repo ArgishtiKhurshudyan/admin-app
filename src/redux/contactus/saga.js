@@ -24,5 +24,4 @@ function* createMessage({payload}) {
 
 export default function* () {
   yield takeLatest(messageStartCreate, createMessage);
-
 }

@@ -14,7 +14,7 @@ const Color = () => {
 
   useEffect(() => {
     dispatch(getColorStart())
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="color">

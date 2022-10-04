@@ -15,7 +15,7 @@ const Profile = () => {
         <Navbar/>
    <span style={{color:"#7451f8"}}>Profile</span>
         <div className="profile-img">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSztEHGDHsSIlKxW_dc1sltM6CBxFNT7ocBQ&usqp=CAU"/>
+          <img alt="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSztEHGDHsSIlKxW_dc1sltM6CBxFNT7ocBQ&usqp=CAU"/>
           <span>Alexandr Xachatryan</span>
         </div>
         <hr/>

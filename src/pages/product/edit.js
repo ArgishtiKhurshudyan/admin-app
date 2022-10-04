@@ -13,7 +13,7 @@ const Edit =() => {
   const { oneProduct } = useSelector(state => state.product)
   useEffect(() => {
     dispatch(findProductRequest(id))
-  }, [])
+  }, [dispatch, id])
 
   return <div className='edit-page'>
     <Sidebar/>

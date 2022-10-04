@@ -5,9 +5,6 @@ import {useEffect} from "react";
 import {getLoginStart} from "./redux/user/actions";
 import publicRoutes from "./routes/publicRoutes";
 import privateRoutes from "./routes/privateRoutes";
-import Sidebar from "./components/sidebar/Sidebar";
-import Navbar from "./components/navbar/Navbar";
-
 
 function App() {
   const token = localStorage.getItem('access_token')
@@ -17,9 +14,9 @@ function App() {
     if (token) {
       dispatch(getLoginStart())
     }
-  }, [token])
+  }, [token, dispatch])
 
-  const {data, isLoginSuccess} = useSelector((state) => state.user)
+  const {isLoginSuccess} = useSelector((state) => state.user)
 
   useEffect(() => {
     if (isLoginSuccess) {
