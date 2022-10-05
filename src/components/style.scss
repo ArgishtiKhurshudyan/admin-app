@@ -1,0 +1,31 @@
+.editing-products {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    color: #7451f8;
+    margin: 5px;
+  }
+  span {
+    color:#7451f8;
+    margin: 4px;
+  }
+  input {
+    width: 130px;
+    border: none;
+    outline: #545353;
+    margin: 5px;
+     }
+.update {
+  width: 100px;
+  margin-left: 330px;
+  background-color: transparent;
+  border: 1px solid #e7e7ec;
+  transition: 1s ease;
+
+  &:hover {
+    background-color: #2d2b2b;
+    color: white;
+  }
+}
+}

@@ -39,12 +39,14 @@ const initialState = {
 
 
 const reducer = handleActions({
-    [productStartCreate]: (state) => ({
-      ...state,
-      isProductCreatedStart: true,
-      isProductCreatedSuccess: false,
-      isProductCreatedFailure: false,
-    }),
+    [productStartCreate]: (state) => {
+     return {
+       ...state,
+       isProductCreatedStart: true,
+       isProductCreatedSuccess: false,
+       isProductCreatedFailure: false,
+     }
+    },
 
     [productCreateSuccess]: (state, {payload}) => {
       return {

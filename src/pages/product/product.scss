@@ -5,13 +5,38 @@
     flex: 6;
 
     .create-product {
+      width: 800px;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      margin: 10px 423px;
+
+      .addBtn {
+        margin: 25px 65px;
+        width: 120px;
+
+      }
+      button {
+        background-color: transparent;
+        height: 35px;
+        border: 1px solid black;
+        border-radius: 5px;
+        font-weight: 500;
+        font-size: 18px;
+        margin: 5px;
+        cursor: pointer;
+        transition: 0.5s ease;
+
+        &:hover {
+          background-color: rgba(26, 133, 203, 0.34);
+          transition: 0.5s ease;
+
+        }
+      }
 
       .product-table {
         width: 900px;
-        margin-top: 100px;
+        //margin-top: 100px;
+
       }
 
     }

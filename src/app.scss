@@ -4,25 +4,33 @@
 
   .sido {
     flex: 6;
+    background-color: #535353;
 
-    .products {
-      width: 450px;
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      background-color: #b69898;
-
-      .get-btn-prod {
-        background-color: orange;
-        border: none;
-        width: 120px;
-        height: 35px ;
-        border-radius: 0  10px 5px 0;
-        cursor: pointer;
-        color: #363232;
-        font-size: 17px;
-        font-weight: 500;
+    .sido-2 {
+      margin: 45px;
+      .span-color {
+        margin: 15px;
       }
+
+      .products {
+        width: 450px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        background-color: #f0f0f0;
+        margin: 15px;
+
+        .get-btn-prod {
+          background-color: orange;
+          border: none;
+          width: 120px;
+          height: 35px;
+          border-radius: 0 10px 5px 0;
+          cursor: pointer;
+          color: #363232;
+          font-size: 17px;
+          font-weight: 500;
+        }
 
         .items {
           width: 100%;
@@ -43,6 +51,6 @@
           }
         }
       }
-
+    }
   }
 }

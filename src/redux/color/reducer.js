@@ -14,6 +14,9 @@ import {
   getColorStart,
   getColorSuccess,
   getColorFailure,
+  findColorRequest,
+  findColorSuccess,
+  findColorFailure,
 } from "./actions"
 
 
@@ -30,8 +33,12 @@ const initialState = {
   isColorGetStart: false,
   isColorGetSuccess: false,
   isColorGetFailure: false,
+  isGettingColor: false,
+  isFoundColorSuccess: false,
+  isFoundColorFailure: false,
   colData: {},
   colorData: [],
+  oneColor: {},
   errorMessage: '',
 }
 
@@ -44,12 +51,12 @@ const reducer = handleActions({
     }),
 
     [colorCreateSuccess]: (state, {payload}) => {
-     return {
-      ...state,
-          isColorCreatedStart: false,
-          isColorCreatedSuccess: true,
-          isColorCreatedFailure: false,
-          colorData: [...state.colorData, payload.data]
+      return {
+        ...state,
+        isColorCreatedStart: false,
+        isColorCreatedSuccess: true,
+        isColorCreatedFailure: false,
+        colorData: [...state.colorData, payload.data]
       }
     },
 
@@ -87,6 +94,7 @@ const reducer = handleActions({
       isColorDeleteFailure: true,
       errorMessage: payload.data
     }),
+
     [colorUpdateStart]: (state) => ({
       ...state,
       isColorUpdateStart: true,
@@ -95,15 +103,11 @@ const reducer = handleActions({
     }),
 
     [colorUpdateSuccess]: (state, {payload}) => {
-      const updated = [...state.colorData]
-      const updatedIndex = state.colorData.findIndex((el) => el.id === payload.id)
-      updated[updatedIndex] = {...updated[updatedIndex], ...payload}
       return {
         ...state,
         isColorUpdateStart: false,
         isColorUpdateSuccess: true,
-        isColorUpdateFailure: false,
-        colorData: updated
+        colorData: payload
       }
     },
 
@@ -136,8 +140,31 @@ const reducer = handleActions({
       isColorGetFailure: true,
       errorMessage: payload.data
     }),
+    [findColorRequest]: (state) => ({
+      ...state,
+      isGettingColor: true,
+      isFoundColorSuccess: false,
+      isFoundColorFailure: false,
+    }),
+    [findColorSuccess]: (state, {payload}) => ({
+      ...state,
+      isGettingColor: false,
+      isFoundColorSuccess: true,
+      oneColor: payload
+    }),
+    [findColorFailure]: (state, {payload}) => ({
+      ...state,
+      isGettingColor: false,
+      isFoundColorFailure: true,
+      errorMessage: payload
+    }),
   },
   initialState
 )
 
 export default reducer;
+
+
+// const updated = [...state.colorData]
+// const updatedIndex = state.colorData.findIndex((el) => el.id === payload.id)
+// updated[updatedIndex] = {...updated[updatedIndex], ...payload}

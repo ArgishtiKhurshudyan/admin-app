@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {productUpdateStart, productUpdateSuccess} from "../redux/product/actions";
 import {useDispatch, useSelector} from "react-redux";
+import './style.scss'
 
 const Modal = ({item, setIsEditing}) => {
   const [product, setProduct] = useState({
@@ -47,25 +48,37 @@ const Modal = ({item, setIsEditing}) => {
     }))
   }
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="update product"
-        value={product.productName}
-        onChange={(e) => handleChange("productName", e.target.value)}
-      />
-      {
-        oneProduct.colors?.map((item, index) => {
-          return (<input
-              type="text"
-              placeholder="update color"
-              value={product.colors[index]?.colorName}
-              onChange={(e) => handleChange("colors", e.target.value, item.id)}
-            />
-          )
-        })
-      }
-      <button onClick={() => handleUpdate(item.id)}>update</button>
+    <div className="editing-products">
+      <>
+        <label>Product</label>
+        <input
+          type="text"
+          placeholder="update product"
+          value={product.productName}
+          onChange={(e) => handleChange("productName", e.target.value)}
+        />
+      </>
+      <>
+
+        <span>Colors</span>
+        {
+          oneProduct.colors?.map((item, index) => {
+            return (
+              <>
+                <input
+                  type="text"
+                  style={{backgroundColor: item.colorName, color: "whitesmoke"}}
+                  placeholder="update color"
+                  value={product.colors[index]?.colorName}
+                  onChange={(e) => handleChange("colors", e.target.value, item.id)}
+                />
+
+              </>
+            )
+          })
+        }
+      </>
+      <button className='update' onClick={() => handleUpdate(item.id)}>update</button>
     </div>
   );
 };

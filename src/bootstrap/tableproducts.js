@@ -25,7 +25,6 @@ export default function ProductsTable() {
           <th scope='col'>Product Name</th>
           <th scope='col'>Colors</th>
           <th scope='col'>Status</th>
-
           <th scope='col'>Actions</th>
         </tr>
       </MDBTableHead>

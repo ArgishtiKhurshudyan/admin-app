@@ -6,6 +6,9 @@ import Profile from "../pages/profile/profile";
 import ContactUs from "../pages/contact/contactUs";
 import Setting from "../pages/settings/setting";
 import Edit from "../pages/product/edit";
+import EditColor from "../pages/color/edit";
+import AddColor from "../pages/color/addColor";
+import AddProduct from "../pages/product/addProduct";
 
 const routes = [
   {
@@ -58,6 +61,24 @@ const routes = [
   },
   {
     id: 8,
+    path: '/color-detail/:id',
+    component: <EditColor/>,
+    permissions: []
+  },
+  {
+    id: 9,
+    path: '/color-add',
+    component: <AddColor/>,
+    permissions: []
+  },
+  {
+    id: 10,
+    path: '/product-add',
+    component: <AddProduct/>,
+    permissions: []
+  },
+  {
+    id: 11,
     path: '*',
     component: <Navigate to="/" replace/>,
     permissions: []

@@ -1,36 +1,27 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import "./color.scss"
-import {useDispatch, useSelector} from "react-redux";
-import {
-  getColorStart
-} from "../../redux/color/actions";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-
+import ColorsTable from "../../bootstrap/tablecolors";
+import QueueIcon from '@mui/icons-material/Queue';
+import {useNavigate} from "react-router-dom";
 const Color = () => {
-  const {colorData} = useSelector(state => state.color)
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getColorStart())
-  }, [dispatch])
-
+const navigate = useNavigate()
+  const handleClick = (id) => {
+    navigate(`/color-add`)
+  }
   return (
     <div className="color">
       <Sidebar/>
       <div className="color-container">
         <Navbar/>
         <h1>Colors</h1>
-        <div className="color-container">
+        <div className="create-container">
           <div className="colors">
-            {colorData?.map((item) =>
-              <div className="item" key={item.id} >
-                <div className="color-title-div"  style={{backgroundColor:item.colorName}}>
-                  <h1>&nbsp;&nbsp;{item.colorName}</h1>
-                </div>
-              </div>
-            )}
+            <ColorsTable/>
           </div>
+          <button className='addBtn' onClick={handleClick}><QueueIcon/> Add</button>
         </div>
       </div>
     </div>

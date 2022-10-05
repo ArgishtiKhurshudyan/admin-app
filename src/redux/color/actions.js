@@ -46,3 +46,7 @@ export const getColorSuccess = createAction(
 export const getColorFailure = createAction(
   "COLOR_GET_FAILURE"
 )
+
+export const findColorRequest = createAction('FIND_COLOR_REQUEST')
+export const findColorSuccess = createAction('FIND_COLOR_SUCCESS')
+export const findColorFailure = createAction('FIND_COLOR_FAILURE')

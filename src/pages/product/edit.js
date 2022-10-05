@@ -35,12 +35,13 @@ const Edit = () => {
     <Sidebar/>
     <div className="sido">
       <Navbar/>
+      <div className="sido-2">
       <h3>Product details</h3>
-      <Alert>{oneProduct.productName}</Alert>
-      {oneProduct?.colors?.map(i => {
-        return <Alert>{i.colorName}</Alert>
-      })
-      }
+      <h5> Product  {oneProduct.productName}</h5>
+        {oneProduct.colors?.map((i) => (
+          <span className="span-color" style={{color:i.colorName}}>{i.colorName}</span>
+
+        ))}
       <div className="products">
         <div className="items">
           <div>
@@ -65,6 +66,7 @@ const Edit = () => {
         <Modal item={oneProduct} setIsEditing={setIsEditing}/>
         }
       </div>
+    </div>
     </div>
   </div>
 }

@@ -10,10 +10,11 @@ import {
   colorStartCreate,
   colorUpdateFailure,
   colorUpdateStart,
-  colorUpdateSuccess,
+  colorUpdateSuccess, findColorFailure, findColorRequest, findColorSuccess,
   getColorFailure,
   getColorStart, getColorSuccess,
 } from "./actions"
+
 
 const token = localStorage.getItem('access_token')
 
@@ -32,10 +33,11 @@ function* createColor({payload}) {
 
 function* updateColor({payload}) {
   try {
-    const response = yield call(() => axios.put(`http://localhost:5000/api/color/${payload.id}`, {colorName: payload.colorName}))
+    const response = yield call(() => axios.put(`http://localhost:5000/api/color/${payload.id}`, payload))
     if (response?.status === 201) {
-      yield put(colorUpdateSuccess(payload));
+      yield put(colorUpdateSuccess(payload.data));
     }
+    console.log("response", response)
   } catch (e) {
     if (e?.response?.data) {
       yield put(colorUpdateFailure(e?.response?.data?.message));
@@ -68,10 +70,24 @@ function* getColors({payload}) {
     }
   }
 }
+function*  findOneColor({ payload }) {
+  try {
+    const response = yield call(() => axios.get(`http://localhost:5000/api/color/find/${payload}`, {headers: {"authorization": `Bearer ${token}`}}))
+    if (response?.status === 200) {
+      yield put(findColorSuccess(response.data));
+    }
+    console.log("response", response)
+  } catch (e) {
+    if (e?.response?.data) {
+      yield put(findColorFailure(e?.response?.data?.message));
+    }
+  }
+}
 
 export default function* () {
   yield takeLatest(colorStartCreate, createColor);
   yield takeLatest(colorUpdateStart, updateColor);
   yield takeLatest(colorDeleteStart, deleteColor);
   yield takeLatest(getColorStart, getColors);
+  yield takeLatest(findColorRequest, findOneColor);
 }
