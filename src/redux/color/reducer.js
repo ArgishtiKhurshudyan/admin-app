@@ -76,14 +76,12 @@ const reducer = handleActions({
     }),
 
     [colorDeleteSuccess]: (state, {payload}) => {
-      const colors = [...state.colorData]
-      const newColors = colors.filter((color) => color.id !== payload)
       return {
         ...state,
         isColorDeleteStart: false,
         isColorDeleteSuccess: true,
         isColorDeleteFailure: false,
-        colorData: newColors
+        colorData: state.colorData.filter(i => i.id !== payload.id)
       }
     },
 

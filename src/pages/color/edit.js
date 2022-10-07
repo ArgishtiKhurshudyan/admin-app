@@ -1,10 +1,9 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import '../../app.scss'
+import './color.scss'
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
-import {Alert} from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import {colorDeleteStart, colorUpdateStart, findColorRequest} from "../../redux/color/actions";
@@ -54,20 +53,17 @@ const EditColor = () => {
     }))
   }
 
-  console.log("name", color.colorName)
-  console.log("colorid", oneColor.color?.id)
-
-
-  return <div className='edit-page'>
+  return <div className='edit-page-color'>
     <Sidebar/>
-    <div className="sido">
+    <div className="detail">
       <Navbar/>
-      <h3>Color detail</h3>
-      <Alert>{oneColor?.color?.colorName}</Alert>
-      <div className="products">
-        <div className="items">
+      {/*<span>{oneColor?.color?.colorName}</span>*/}
+      <div className="color">
+        <h5>Color details</h5>
+        <div className="item">
           <div>
-            <span>color: {oneColor?.color?.colorName}</span>
+            <h6>Color name  </h6>
+            <span style={{color:oneColor?.color?.colorName}}>{oneColor?.color?.colorName}</span>
           </div>
           <div className="change-btn">
             <button onClick={() => handleDelete(oneColor.color.id)}><DeleteForeverIcon style={{color: "#e28282"}}/>

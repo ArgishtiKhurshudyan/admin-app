@@ -16,7 +16,7 @@ const navigate = useNavigate()
       <Sidebar/>
       <div className="color-container">
         <Navbar/>
-        <h1>Colors</h1>
+        {/*<h1>Colors</h1>*/}
         <div className="create-container">
           <div className="colors">
             <ColorsTable/>

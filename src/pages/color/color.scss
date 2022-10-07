@@ -6,7 +6,7 @@
 
     .create-container {
       width: 800px;
-      margin: 10px 423px;
+      margin: 50px auto;
       display: flex;
       justify-content: space-between;
 
@@ -44,9 +44,16 @@
     .colors {
       width: 800px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
+      flex-direction: column;
       background-color: #54586a;
+
+      .inp-div {
+        width: 600px;
+        display: flex;
+        align-items: center;
+      }
 
       .getColors-btn {
         width: 120px;
@@ -95,4 +102,45 @@
     }
 
   }
+}
+
+.edit-page-color {
+  display: flex;
+
+  .detail {
+    flex: 6;
+
+    .color {
+      width: 500px;
+      height: auto;
+      margin: 100px  auto;
+      display: flex;
+      flex-direction: column;
+      background-color: teal;
+
+      h5 {
+        color: wheat;
+      }
+
+      .item {
+        width: 100%;
+        height: 60px;
+        margin: 10px 0;
+        background-color: #484646;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+
+        .change-btn {
+          button {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
 }

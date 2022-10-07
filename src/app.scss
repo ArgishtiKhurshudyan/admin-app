@@ -4,21 +4,40 @@
 
   .sido {
     flex: 6;
-    background-color: #535353;
+    background-color: #a3a3a3;
 
     .sido-2 {
-      margin: 45px;
+      margin: 50px auto;
+      width: 800px;
+      border: 1px solid white;
+      .h1-detail {
+        background-color: #484848;
+        color: wheat
+      }
+
+      .h5-name {
+        color: white;
+        border-bottom: 1px solid wheat;
+        margin: 5px;
+      }
+
       .span-color {
         margin: 15px;
+        border-bottom: 1px solid white;
+      }
+
+      .span-color-title {
+        color: white;
+        margin: 6px;
       }
 
       .products {
-        width: 450px;
+        width: 788px;
         height: auto;
         display: flex;
         flex-direction: column;
         background-color: #f0f0f0;
-        margin: 15px;
+        margin: 5px;
 
         .get-btn-prod {
           background-color: orange;

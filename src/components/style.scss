@@ -1,5 +1,6 @@
 .editing-products {
   display: flex;
+  justify-content: space-around;
   flex-direction: column;
 
   label {
@@ -18,7 +19,7 @@
      }
 .update {
   width: 100px;
-  margin-left: 330px;
+  margin-left: 87.2%;
   background-color: transparent;
   border: 1px solid #e7e7ec;
   transition: 1s ease;
@@ -28,4 +29,26 @@
     color: white;
   }
 }
+
+  .inp-product-update {
+    display: flex;
+    align-items: center;
+
+  }
+  .color-div{
+    //position: absolute;
+    margin-left: 480px;
+  }
+
+  .color-checkbox {
+    background-color: #3a3a3a;
+    width: 300px;
+
+    label{
+      color: wheat;
+      width: 90px;
+      text-align: center;
+    }
+  }
+
 }

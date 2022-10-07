@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getColorStart} from "../../redux/color/actions";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-
+import "../../components/settingsconfiguration/productModal.scss"
 const AddProduct = () => {
   const [err, setErr] = useState(false)
   const [isClick, setIsClick] = useState(false)
@@ -15,7 +15,7 @@ const AddProduct = () => {
   })
   const dispatch = useDispatch();
   const {colorData} = useSelector(state => state.color)
-
+  console.log(colors)
   useEffect(() => {
     dispatch(getColorStart())
   }, [dispatch])
@@ -66,10 +66,9 @@ const AddProduct = () => {
       <Sidebar/>
       <div className="product-container">
         <Navbar/>
-
       <div className="product-container-create">
         <div className="product-create">
-          <h3>Create product</h3>
+          <h5>Create product</h5>
           <input
             type="text"
             placeholder="product name"
@@ -79,20 +78,20 @@ const AddProduct = () => {
             onChange={(e) => handleChange('productName', e.target.value)}
           />
           <button className="create-btn-prod" onClick={handleCreate}>create</button>
-          <div className="colors-div">
-            <h3>Select product color</h3>
-            {colorData?.map((item) => (
-              <div className="select-color-container">
-                <button id={item.id} className={isClick && ""} onClick={(e) => {
-                  addActiveColor(item)
-                  formData.colors.push(item.id)
-                }}
-                >
-                  {item.colorName}
-                </button>
-              </div>
-            ))}
-          </div>
+        </div>
+        <div className="colors-div">
+          <h5>Select product color</h5>
+          {colorData?.map((item) => (
+            <div className="select-color-container">
+              <button id={item.id} className={isClick && ""} onClick={(e) => {
+                addActiveColor(item)
+                formData.colors.push(item.id)
+              }}
+              >
+                {item.colorName}
+              </button>
+            </div>
+          ))}
         </div>
       </div>
     </div>

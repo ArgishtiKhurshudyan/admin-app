@@ -96,13 +96,16 @@ const reducer = handleActions({
       isProductDeletedFailure: false,
     }),
 
-    [productDeleteSuccess]: (state, {payload}) => ({
-      ...state,
-      isProductDeletedStart: false,
-      isProductDeletedSuccess: true,
-      isProductDeletedFailure: false,
-      data: state.data.filter(i => i.id !== payload.id)
-    }),
+    [productDeleteSuccess]: (state, {payload}) => {
+      return {
+        ...state,
+        isProductDeletedStart: false,
+        isProductDeletedSuccess: true,
+        isProductDeletedFailure: false,
+        data: state.data.filter(i => i.id !== payload.id),
+    }
+
+    },
     [productDeleteFailure]: (state, {payload}) => ({
       ...state,
       isProductDeletedStart: false,
@@ -118,6 +121,9 @@ const reducer = handleActions({
     }),
 
     [getProductSuccess]: (state, {payload}) => {
+      // const x = payload?.products.map((i)=> i.colors)
+      // x?.map((id)=>id?.[0].id !== id)
+      // console.log("oneproduct", )
       return {
         ...state,
         isProductGetStart: false,

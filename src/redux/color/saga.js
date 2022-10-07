@@ -49,7 +49,7 @@ function* deleteColor({payload}) {
   try {
     const response = yield call(() => axios.delete(`http://localhost:5000/api/color/${payload.id}`, {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {
-      yield put(colorDeleteSuccess(payload.id));
+      yield put(colorDeleteSuccess(response.data));
     }
     } catch (e) {
     if (e?.response?.data) {

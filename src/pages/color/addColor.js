@@ -35,9 +35,10 @@ const AddColor = () => {
       <Sidebar/>
       <div className="color-container">
         <Navbar/>
-        <h1>Colors</h1>
         <div className="create-container">
           <div className="colors">
+            <h5 style={{color:"wheat"}}>Create color</h5>
+          <div className="inp-div">
             <input
               type="text"
               ref={colorName}
@@ -46,6 +47,7 @@ const AddColor = () => {
               required
             />
             <button onClick={handleCreateColor}>Add color</button>
+          </div>
           </div>
         </div>
       </div>
