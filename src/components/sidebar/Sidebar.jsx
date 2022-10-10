@@ -15,14 +15,6 @@ const Sidebar = () => {
   const style = {
     textDecoration: "none"
   }
-  // useEffect(() => {
-  //   if (dialog.yesConfirm) {
-  //     localStorage.removeItem("access_token")
-  //     window.location.replace('/login')
-  //   } else {
-  //     // setClick(false)
-  //   }
-  // }, [])
 
   const handleConfirm = (isConfirm) => {
    if(isConfirm){
@@ -31,7 +23,6 @@ const Sidebar = () => {
    }
   }
   const handleClick = () => {
-    // setClick(true)
     setIsOpen(true)
   }
 
@@ -83,13 +74,7 @@ const Sidebar = () => {
             <LogoutIcon className="icon"/>
             <span onClick={handleClick}>Log out</span>
           </li>
-
            <li>
-            {/*<span>{dialog.message}</span>*/}
-            {/*<div className="btn">*/}
-            {/*  <button key={1} onClick={(e) => handleConfirm('yesConfirm', !dialog.yesConfirm)}>Yes</button>*/}
-            {/*  <button key={2} onClick={(e) => handleConfirm('notConfirm', dialog.notConfirm)}>No</button>*/}
-            {/*</div>*/}
              <Confirmation handleConfirm={handleConfirm} isOpen={isOpen} setIsOpen={setIsOpen}/>
           </li>
         </ul>

@@ -101,11 +101,12 @@ const reducer = handleActions({
     }),
 
     [colorUpdateSuccess]: (state, {payload}) => {
+      console.log('payload', payload)
       return {
         ...state,
         isColorUpdateStart: false,
         isColorUpdateSuccess: true,
-        colorData: payload
+        oneColor: payload.data,
       }
     },
 
@@ -144,12 +145,14 @@ const reducer = handleActions({
       isFoundColorSuccess: false,
       isFoundColorFailure: false,
     }),
-    [findColorSuccess]: (state, {payload}) => ({
-      ...state,
-      isGettingColor: false,
-      isFoundColorSuccess: true,
-      oneColor: payload
-    }),
+    [findColorSuccess]: (state, {payload}) => {
+      return {
+        ...state,
+        isGettingColor: false,
+        isFoundColorSuccess: true,
+        oneColor: payload
+      }
+    },
     [findColorFailure]: (state, {payload}) => ({
       ...state,
       isGettingColor: false,
@@ -162,7 +165,7 @@ const reducer = handleActions({
 
 export default reducer;
 
-
+//
 // const updated = [...state.colorData]
 // const updatedIndex = state.colorData.findIndex((el) => el.id === payload.id)
 // updated[updatedIndex] = {...updated[updatedIndex], ...payload}

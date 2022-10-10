@@ -34,8 +34,8 @@ function* createColor({payload}) {
 function* updateColor({payload}) {
   try {
     const response = yield call(() => axios.put(`http://localhost:5000/api/color/${payload.id}`, payload))
-    if (response?.status === 201) {
-      yield put(colorUpdateSuccess(payload.data));
+    if (response?.status === 200) {
+      yield put(colorUpdateSuccess(response.data));
     }
     console.log("response", response)
   } catch (e) {
@@ -74,7 +74,7 @@ function*  findOneColor({ payload }) {
   try {
     const response = yield call(() => axios.get(`http://localhost:5000/api/color/find/${payload}`, {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {
-      yield put(findColorSuccess(response.data));
+      yield put(findColorSuccess(response.data.color));
     }
     console.log("response", response)
   } catch (e) {
