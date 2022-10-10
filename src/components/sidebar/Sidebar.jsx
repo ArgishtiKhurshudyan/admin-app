@@ -8,35 +8,31 @@ import ColorLensIcon from '@mui/icons-material/ColorLens';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {Link} from "react-router-dom";
+import Confirmation from "../confirmation";
 
 const Sidebar = () => {
-  const [dialog, setDialog] = useState({
-    message: "Are you sure?",
-    yesConfirm: false,
-    notConfirm: false
-  })
-  const [click, setClick] = useState(false)
-
+  const [isOpen, setIsOpen] = useState(false)
   const style = {
     textDecoration: "none"
   }
-  useEffect(() => {
-    if (dialog.yesConfirm) {
-      localStorage.removeItem("access_token")
-      window.location.replace('/login')
-    } else {
-      setClick(false)
-    }
-  }, [dialog])
+  // useEffect(() => {
+  //   if (dialog.yesConfirm) {
+  //     localStorage.removeItem("access_token")
+  //     window.location.replace('/login')
+  //   } else {
+  //     // setClick(false)
+  //   }
+  // }, [])
 
-  const handleConfirm = (field, value) => {
-    setDialog(prevState => ({
-      ...prevState,
-      [field]: value
-    }))
+  const handleConfirm = (isConfirm) => {
+   if(isConfirm){
+     localStorage.removeItem("access_token")
+     window.location.replace('/login')
+   }
   }
   const handleClick = () => {
-    setClick(true)
+    // setClick(true)
+    setIsOpen(true)
   }
 
   return (
@@ -88,13 +84,14 @@ const Sidebar = () => {
             <span onClick={handleClick}>Log out</span>
           </li>
 
-          {click && <li>
-            <span>{dialog.message}</span>
-            <div className="btn">
-              <button key={1} onClick={(e) => handleConfirm('yesConfirm', !dialog.yesConfirm)}>Yes</button>
-              <button key={2} onClick={(e) => handleConfirm('notConfirm', dialog.notConfirm)}>No</button>
-            </div>
-          </li>}
+           <li>
+            {/*<span>{dialog.message}</span>*/}
+            {/*<div className="btn">*/}
+            {/*  <button key={1} onClick={(e) => handleConfirm('yesConfirm', !dialog.yesConfirm)}>Yes</button>*/}
+            {/*  <button key={2} onClick={(e) => handleConfirm('notConfirm', dialog.notConfirm)}>No</button>*/}
+            {/*</div>*/}
+             <Confirmation handleConfirm={handleConfirm} isOpen={isOpen} setIsOpen={setIsOpen}/>
+          </li>
         </ul>
       </div>
     </div>

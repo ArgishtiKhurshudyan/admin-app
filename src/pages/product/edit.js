@@ -8,9 +8,11 @@ import {findProductRequest, productDeleteStart} from "../../redux/product/action
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import Modal from "../../components/Modal";
+import Confirmation from "../../components/confirmation";
 
 const Edit = () => {
   const [isEditing, setIsEditing] = useState()
+  const [isOpen, setIsOpen] = useState(false)
   const {id} = useParams();
   const dispatch = useDispatch()
   const {oneProduct} = useSelector(state => state.product)
@@ -20,13 +22,18 @@ const Edit = () => {
     dispatch(findProductRequest(id))
   }, [dispatch, id])
 
-
-  const handleDelete = (id) => {
-    dispatch(productDeleteStart({id}))
-    navigate('/products')
+  const handleConfirm = (isConfirm, value) => {
+    if(isConfirm) {
+      dispatch(productDeleteStart({id:value}))
+      navigate('/products')
+    }
   }
 
-  const handleEditProduct = (id) => {
+  const handleDelete = async () => {
+    setIsOpen(true)
+  }
+
+  const handleEditProduct = () => {
     setIsEditing(!isEditing)
   }
 
@@ -57,9 +64,10 @@ const Edit = () => {
             </div>
           </div>
           <div className="change-btn">
-            <button onClick={() => handleDelete(oneProduct.id)}><DeleteForeverIcon style={{color: "#e28282"}}/></button>
+            <button onClick={handleDelete}><DeleteForeverIcon style={{color: "#e28282"}}/></button>
             <button onClick={() => handleEditProduct(oneProduct.id)}><ModeEditIcon style={{color: "white"}}/></button>
           </div>
+          <Confirmation handleConfirm={handleConfirm} isOpen={isOpen} setIsOpen={setIsOpen} value={oneProduct.id}/>
         </div>
         {isEditing &&
         <Modal item={oneProduct} setIsEditing={setIsEditing}/>

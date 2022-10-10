@@ -8,7 +8,7 @@ const Modal = ({item}) => {
   const [product, setProduct] = useState({
     productName: '',
     colors: [],
-    newColors:[]
+    newColors: []
   })
   const checked = useRef()
   const [updateColors, setUpdateColors] = useState({})
@@ -33,14 +33,15 @@ const Modal = ({item}) => {
       id: id,
       productName: product.productName,
       colors: updateColors.colors,
-      newColor: product.newColors,
+      newColor: product.newColors
     }
     dispatch(productUpdateStart(payload))
+
     if (productUpdateSuccess) {
       alert("product has been updated")
     }
 
-    if (checked.current){
+    if (checked.current) {
       handleDelete(checked.current.value)
     }
   }
@@ -98,7 +99,7 @@ const Modal = ({item}) => {
                 onChange={(e) => (
                   product.newColors.push(e.target.id)
                 )}/>
-              <label htmlFor={item.colorName} style={{backgroundColor:item.colorName}}> {item.colorName}</label>
+              <label htmlFor={item.colorName} style={{backgroundColor: item.colorName}}> {item.colorName}</label>
             </div>
           ))}
         </div>

@@ -7,8 +7,11 @@ import {useNavigate, useParams} from "react-router-dom";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import {colorDeleteStart, colorUpdateStart, findColorRequest} from "../../redux/color/actions";
+import {productDeleteStart} from "../../redux/product/actions";
+import Confirmation from "../../components/confirmation";
 
 const EditColor = () => {
+  const [isOpen, setIsOpen] = useState(false)
   const [isEditing, setIsEditing] = useState()
   const [color, setColor] = useState({
     colorName: ''
@@ -29,12 +32,20 @@ const EditColor = () => {
     })
   }, [oneColor])
 
-  const handleDelete = (id) => {
-    dispatch(colorDeleteStart({id}))
-    navigate('/colors')
+
+
+  const handleConfirm = (isConfirm, value) => {
+    if(isConfirm) {
+      dispatch(colorDeleteStart({id:value}))
+      navigate('/colors')
+    }
   }
 
-  const handleEditProduct = (id) => {
+  const handleDelete = async() => {
+    setIsOpen(true)
+  }
+
+  const handleEditColor = () => {
     setIsEditing(!isEditing)
   }
   const handleUpdateColor = (id) => {
@@ -53,6 +64,8 @@ const EditColor = () => {
     }))
   }
 
+  // console.log(oneColor.color.id)
+
   return <div className='edit-page-color'>
     <Sidebar/>
     <div className="detail">
@@ -66,10 +79,11 @@ const EditColor = () => {
             <span style={{color:oneColor?.color?.colorName}}>{oneColor?.color?.colorName}</span>
           </div>
           <div className="change-btn">
-            <button onClick={() => handleDelete(oneColor.color.id)}><DeleteForeverIcon style={{color: "#e28282"}}/>
+            <button onClick={handleDelete}><DeleteForeverIcon style={{color: "#e28282"}}/>
             </button>
-            <button onClick={() => handleEditProduct(oneColor.id)}><ModeEditIcon style={{color: "white"}}/></button>
+            <button onClick={handleEditColor}><ModeEditIcon style={{color: "white"}}/></button>
           </div>
+          <Confirmation handleConfirm={handleConfirm} isOpen={isOpen} setIsOpen={setIsOpen} value={oneColor?.color?.id}/>
         </div>
         {isEditing &&
         <div className="editInput">
