@@ -83,7 +83,6 @@ const EditColor = () => {
             </button>
             <button onClick={handleEditColor}><ModeEditIcon style={{color: "white"}}/></button>
           </div>
-          <Confirmation handleConfirm={handleConfirm} isOpen={isOpen} setIsOpen={setIsOpen} value={oneColor?.color?.id}/>
         </div>
         {isEditing &&
         <div className="editInput">
@@ -96,6 +95,9 @@ const EditColor = () => {
           <button onClick={() => handleUpdateColor(oneColor?.color.id)}>update</button>
         </div>
         }
+        <div className={isOpen ? "confirm" : ''}>
+          <Confirmation handleConfirm={handleConfirm} isOpen={isOpen} setIsOpen={setIsOpen} value={oneColor?.color?.id}/>
+        </div>
       </div>
     </div>
   </div>
