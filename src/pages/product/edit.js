@@ -67,11 +67,14 @@ const Edit = () => {
             <button onClick={handleDelete}><DeleteForeverIcon style={{color: "#e28282"}}/></button>
             <button onClick={() => handleEditProduct(oneProduct.id)}><ModeEditIcon style={{color: "white"}}/></button>
           </div>
-          <Confirmation handleConfirm={handleConfirm} isOpen={isOpen} setIsOpen={setIsOpen} value={oneProduct.id}/>
         </div>
         {isEditing &&
         <Modal item={oneProduct} setIsEditing={setIsEditing}/>
         }
+
+        <div className={isOpen ? "confirm" : ''}>
+          <Confirmation handleConfirm={handleConfirm} isOpen={isOpen} setIsOpen={setIsOpen} value={oneProduct.id}/>
+        </div>
       </div>
     </div>
     </div>
