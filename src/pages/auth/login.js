@@ -62,9 +62,9 @@ const SignIn = () => {
           <div onClick={handleClickIcon} className="icon">{closeIcon ? <RemoveRedEyeIcon/> :
             <VisibilityOffIcon/>}</div>
         </div>
-        <button type="submit">{isLoginStart ? "loading..." : "Submit"}</button>
+        <button className='button' type="submit">{isLoginStart ? "loading..." : "Submit"}</button>
         <Link to="/register" style={{width: "90px"}}>
-          <button className="signUp-btn">signUp</button>
+          <button className="signUp-btn button">signUp</button>
         </Link>
         <div style={{color: 'red'}}>{message}</div>
       </form>
