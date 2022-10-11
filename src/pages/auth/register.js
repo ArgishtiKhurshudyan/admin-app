@@ -18,7 +18,7 @@ const SignUp = () => {
     password: '',
     confirmPassword: ''
   })
-
+  const [isDisabled, setIsDisabled] = useState(false)
   const dispatch = useDispatch()
   const {isRegisterFailure, isRegisterSuccess, errorMessage} = useSelector(state => state.user)
   const [message, setMessage] = useState(errorMessage)
@@ -42,6 +42,14 @@ const SignUp = () => {
       setMessage("password must be min 8 digits")
     }
   }
+
+  useEffect(()=> {
+    if (!data.firstName){
+      setIsDisabled(true)
+    }else {
+      setIsDisabled(false)
+    }
+  }, [data])
 
   const handleChange = (field, value) => {
     setData(prevState => ({
@@ -126,7 +134,9 @@ const SignUp = () => {
               {icon.confirmPassword ? <RemoveRedEyeIcon/> : <VisibilityOffIcon/>}
             </div>
           </div>
-          <button type="submit">Submit</button>
+          <button disabled={!data.firstName} className={isDisabled ? 'disabled' : 'button'} type="submit">Submit</button>
+
+
           <Link to="/login" style={{textDecoration: "none", color: "blue", fontWeight: "600"}}>signIn</Link>
           <div style={{color: "red"}}>{message}</div>
         </form>

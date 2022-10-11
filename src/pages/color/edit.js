@@ -26,7 +26,6 @@ const EditColor = () => {
 
   useEffect(() => {
     setColor({
-      ...color,
       colorName: oneColor?.colorName,
     })
   }, [oneColor])
@@ -65,6 +64,7 @@ const EditColor = () => {
       [field]: value
     }))
   }
+
   console.log('oneColor', oneColor)
   return <div className='edit-page-color'>
     <Sidebar/>

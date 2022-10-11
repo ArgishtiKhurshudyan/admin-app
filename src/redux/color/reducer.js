@@ -1,6 +1,5 @@
 import {handleActions} from 'redux-actions';
 
-
 import {
   colorCreateFailure,
   colorCreateSuccess,
@@ -66,8 +65,8 @@ const reducer = handleActions({
       isColorCreatedSuccess: false,
       isColorCreatedFailure: true,
       errorMessage: payload.data
-
     }),
+
     [colorDeleteStart]: (state) => ({
       ...state,
       isColorDeleteStart: true,
@@ -117,6 +116,7 @@ const reducer = handleActions({
       isColorUpdateFailure: true,
       errorMessage: payload.data
     }),
+
     [getColorStart]: (state) => ({
       ...state,
       isColorGetStart: true,
@@ -139,12 +139,14 @@ const reducer = handleActions({
       isColorGetFailure: true,
       errorMessage: payload.data
     }),
+
     [findColorRequest]: (state) => ({
       ...state,
       isGettingColor: true,
       isFoundColorSuccess: false,
       isFoundColorFailure: false,
     }),
+
     [findColorSuccess]: (state, {payload}) => {
       return {
         ...state,
@@ -153,6 +155,7 @@ const reducer = handleActions({
         oneColor: payload
       }
     },
+
     [findColorFailure]: (state, {payload}) => ({
       ...state,
       isGettingColor: false,
