@@ -30,7 +30,7 @@ const ContactUs = () => {
       Swal.fire('Message send success!')
       navigate("/")
     }
-  }, [errorMessage, isMessageCreatedSuccess, navigate, prevIsMessage])
+  }, [errorMessage, isMessageCreatedSuccess])
 
   const handleCreate = () => {
     const messages = {
@@ -39,7 +39,6 @@ const ContactUs = () => {
       message: message.message
     }
       dispatch(messageStartCreate({messages}))
-
   }
 
   const handleChange = (field, value) => {

@@ -7,6 +7,7 @@ import Navbar from "../../components/navbar/Navbar";
 import "../../components/settingsconfiguration/productModal.scss"
 import {Toastify} from "../../components/toasterror";
 import Swal from "sweetalert2";
+import usePrevious from "../../hooks/usePrevious";
 
 const AddProduct = () => {
   const [err, setErr] = useState(false)
@@ -19,15 +20,15 @@ const AddProduct = () => {
   const dispatch = useDispatch();
   const {colorData} = useSelector(state => state.color)
   const {errorMessage, isProductCreatedSuccess} = useSelector(state => state.product)
-
+const prevIsCreateProduct = usePrevious(isProductCreatedSuccess)
   useEffect(() => {
     if(errorMessage) {
       Toastify(errorMessage, 'error')
     }
-    if(isProductCreatedSuccess) {
+    if(isProductCreatedSuccess && prevIsCreateProduct === false) {
       Swal.fire('Product created success!')
     }
-  }, [errorMessage, isProductCreatedSuccess])
+  }, [errorMessage, isProductCreatedSuccess,prevIsCreateProduct])
 
 
   useEffect(() => {
