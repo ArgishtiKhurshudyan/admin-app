@@ -5,6 +5,9 @@ import {getColorStart} from "../../redux/color/actions";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "../../components/settingsconfiguration/productModal.scss"
+import {Toastify} from "../../components/toasterror";
+import Swal from "sweetalert2";
+
 const AddProduct = () => {
   const [err, setErr] = useState(false)
   const [isClick, setIsClick] = useState(false)
@@ -15,7 +18,18 @@ const AddProduct = () => {
   })
   const dispatch = useDispatch();
   const {colorData} = useSelector(state => state.color)
-  console.log(colors)
+  const {errorMessage, isProductCreatedSuccess} = useSelector(state => state.product)
+
+  useEffect(() => {
+    if(errorMessage) {
+      Toastify(errorMessage, 'error')
+    }
+    if(isProductCreatedSuccess) {
+      Swal.fire('Product created success!')
+    }
+  }, [errorMessage, isProductCreatedSuccess])
+
+
   useEffect(() => {
     dispatch(getColorStart())
   }, [dispatch])
@@ -25,6 +39,7 @@ const AddProduct = () => {
   }, [dispatch])
 
   const handleCreate = () => {
+
     const product = {
       productName: formData.productName,
       colors: formData.colors,
@@ -33,10 +48,8 @@ const AddProduct = () => {
     if (formData.productName) {
       dispatch(productStartCreate({product: product}))
       setIsClick(true)
-        if (productCreateSuccess()) {
-          alert("product is created")
-        }
     }
+
     if (!formData['productName'].length) {
       setErr(true)
     } else {
@@ -44,7 +57,6 @@ const AddProduct = () => {
     }
 
     return {
-      fromData: formData.productName = "",
       colorData: formData.colors = []
     }
   }
@@ -64,6 +76,7 @@ const AddProduct = () => {
   return (
     <div className='product'>
       <Sidebar/>
+
       <div className="product-container">
         <Navbar/>
       <div className="product-container-create">

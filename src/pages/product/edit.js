@@ -9,23 +9,36 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import Modal from "../../components/Modal";
 import Confirmation from "../../components/confirmation";
+import Swal from "sweetalert2";
+import {Toastify} from "../../components/toasterror";
+import usePrevious from "../../hooks/usePrevious";
 
 const Edit = () => {
   const [isEditing, setIsEditing] = useState()
   const [isOpen, setIsOpen] = useState(false)
   const {id} = useParams();
   const dispatch = useDispatch()
-  const {oneProduct} = useSelector(state => state.product)
+  const {oneProduct,  isProductDeletedSuccess, errorMessage} = useSelector(state => state.product)
   const navigate = useNavigate()
-
+  const prevIsProductDeleteSuccess = usePrevious(isProductDeletedSuccess)
   useEffect(() => {
     dispatch(findProductRequest(id))
   }, [dispatch, id])
 
+  useEffect(() => {
+    if(errorMessage) {
+      Toastify(errorMessage, 'error')
+    }
+    if(isProductDeletedSuccess && prevIsProductDeleteSuccess === false) {
+      Swal.fire('Product deleted!')
+      navigate('/products')
+    }
+  },[isProductDeletedSuccess, errorMessage])
+
   const handleConfirm = (isConfirm, value) => {
     if(isConfirm) {
       dispatch(productDeleteStart({id:value}))
-      navigate('/products')
+
     }
   }
 

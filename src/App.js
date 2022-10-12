@@ -1,10 +1,11 @@
 import './app.scss'
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {getLoginStart} from "./redux/user/actions";
 import publicRoutes from "./routes/publicRoutes";
 import privateRoutes from "./routes/privateRoutes";
+import {ToastContainer} from "react-toastify";
 
 function App() {
   const token = localStorage.getItem('access_token')
@@ -26,6 +27,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ToastContainer/>
         <Routes>
           <Route path="/">
             {

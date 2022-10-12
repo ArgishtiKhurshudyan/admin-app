@@ -8,6 +8,9 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import {colorDeleteStart, colorUpdateStart, colorUpdateSuccess, findColorRequest} from "../../redux/color/actions";
 import Confirmation from "../../components/confirmation";
+import {Toastify} from "../../components/toasterror";
+import Swal from "sweetalert2";
+import usePrevious from "../../hooks/usePrevious";
 
 const EditColor = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -17,9 +20,10 @@ const EditColor = () => {
   })
   const {id} = useParams();
   const dispatch = useDispatch()
-  const {oneColor} = useSelector(state => state.color)
+  const {oneColor, errorMessage, isColorDeleteSuccess, isColorUpdateSuccess} = useSelector(state => state.color)
   const navigate = useNavigate()
-
+  const prevIsColorDeleteSuccess = usePrevious(isColorDeleteSuccess)
+  const prevIsColorUpdateSuccess = usePrevious(isColorUpdateSuccess)
   useEffect(() => {
     dispatch(findColorRequest(id))
   }, [dispatch, id])
@@ -30,15 +34,27 @@ const EditColor = () => {
     })
   }, [oneColor])
 
+  useEffect(() => {
+    if (errorMessage) {
+      Toastify(errorMessage, 'error')
+    }
+    if (isColorUpdateSuccess && prevIsColorUpdateSuccess === false) {
+      Swal.fire('Color updated!')
+    }
+    if (isColorDeleteSuccess && prevIsColorDeleteSuccess === false) {
+      Swal.fire('Color deleted!')
+      navigate('/colors')
+    }
+
+  }, [errorMessage,  isColorUpdateSuccess, isColorDeleteSuccess, navigate])
 
   const handleConfirm = (isConfirm, value) => {
-    if(isConfirm) {
-      dispatch(colorDeleteStart({id:value}))
-      navigate('/colors')
+    if (isConfirm) {
+      dispatch(colorDeleteStart({id: value}))
     }
   }
 
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     setIsOpen(true)
   }
 
@@ -53,9 +69,6 @@ const EditColor = () => {
     }
     dispatch(colorUpdateStart(payload))
 
-    if (colorUpdateSuccess) {
-      alert("color is updated")
-    }
   }
 
   const handleChange = (field, value) => {
@@ -65,7 +78,6 @@ const EditColor = () => {
     }))
   }
 
-  console.log('oneColor', oneColor)
   return <div className='edit-page-color'>
     <Sidebar/>
     <div className="detail">
@@ -74,8 +86,8 @@ const EditColor = () => {
         <h5>Color details</h5>
         <div className="item">
           <div>
-            <h6>Color name  </h6>
-            <span style={{color:oneColor?.colorName}}>{oneColor?.colorName}</span>
+            <h6>Color name </h6>
+            <span style={{color: oneColor?.colorName}}>{oneColor?.colorName}</span>
           </div>
           <div className="change-btn">
             <button onClick={handleDelete}><DeleteForeverIcon style={{color: "#e28282"}}/>

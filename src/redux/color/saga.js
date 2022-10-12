@@ -10,11 +10,14 @@ import {
   colorStartCreate,
   colorUpdateFailure,
   colorUpdateStart,
-  colorUpdateSuccess, findColorFailure, findColorRequest, findColorSuccess,
+  colorUpdateSuccess,
+  findColorFailure,
+  findColorRequest,
+  findColorSuccess,
   getColorFailure,
-  getColorStart, getColorSuccess,
+  getColorStart,
+  getColorSuccess,
 } from "./actions"
-
 
 const token = localStorage.getItem('access_token')
 
@@ -70,6 +73,7 @@ function* getColors({payload}) {
     }
   }
 }
+
 function*  findOneColor({ payload }) {
   try {
     const response = yield call(() => axios.get(`http://localhost:5000/api/color/find/${payload}`, {headers: {"authorization": `Bearer ${token}`}}))

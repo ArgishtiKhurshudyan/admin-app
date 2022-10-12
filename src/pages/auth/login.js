@@ -6,6 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {getLoginStart} from "../../redux/user/actions";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import {Toastify} from "../../components/toasterror";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
   const [credentials, setCredentials] = useState({
@@ -15,8 +17,16 @@ const SignIn = () => {
   const [closeIcon, setCloseIcon] = useState(false)
   const navigate = useNavigate()
   const {isLoginStart, isLoginSuccess, isLoginFailure, errorMessage} = useSelector(state => state.user)
-  const [message, setMessage] = useState(errorMessage)
+  // const [message, setMessage] = useState(errorMessage)
   const dispatch = useDispatch();
+
+
+
+  useEffect(()=> {
+    if (errorMessage) {
+      Toastify(errorMessage, 'error')
+    }
+  }, [errorMessage])
 
   const handleChange = (e) => {
     setCredentials((prev) => ({...prev, [e.target.id]: e.target.value}));
@@ -30,11 +40,11 @@ const SignIn = () => {
     }
   }
 
-  useEffect(() => {
-    if (isLoginFailure) {
-      setMessage(errorMessage);
-    }
-  }, [isLoginFailure, errorMessage])
+  // useEffect(() => {
+  //   if (isLoginFailure) {
+  //     setMessage(errorMessage);
+  //   }
+  // }, [isLoginFailure, errorMessage])
 
   const handleClickIcon = (e) => {
     setCloseIcon(!closeIcon)
@@ -66,7 +76,7 @@ const SignIn = () => {
         <Link to="/register" style={{width: "90px"}}>
           <button className="signUp-btn button">signUp</button>
         </Link>
-        <div style={{color: 'red'}}>{message}</div>
+        {/*<div style={{color: 'red'}}>{message}</div>*/}
       </form>
 
     </div>

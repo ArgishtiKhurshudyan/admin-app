@@ -29,6 +29,7 @@ function* createProduct({payload}) {
     }
   } catch (e) {
     if (e?.response?.data) {
+      // console.log("e?.response?.data", e?.response?.data)
       yield put(productCreateFailure(e?.response?.data?.message));
     }
   }

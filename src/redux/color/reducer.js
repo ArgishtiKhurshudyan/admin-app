@@ -47,6 +47,7 @@ const reducer = handleActions({
       isColorCreatedStart: true,
       isColorCreatedSuccess: false,
       isColorCreatedFailure: false,
+      errorMessage: ''
     }),
 
     [colorCreateSuccess]: (state, {payload}) => {
@@ -59,13 +60,15 @@ const reducer = handleActions({
       }
     },
 
-    [colorCreateFailure]: (state, {payload}) => ({
-      ...state,
-      isColorCreatedStart: false,
-      isColorCreatedSuccess: false,
-      isColorCreatedFailure: true,
-      errorMessage: payload.data
-    }),
+    [colorCreateFailure]: (state, {payload}) => {
+     return {
+       ...state,
+       isColorCreatedStart: false,
+       isColorCreatedSuccess: false,
+       isColorCreatedFailure: true,
+       errorMessage: payload
+     }
+    },
 
     [colorDeleteStart]: (state) => ({
       ...state,
@@ -84,13 +87,15 @@ const reducer = handleActions({
       }
     },
 
-    [colorDeleteFailure]: (state, {payload}) => ({
-      ...state,
-      isColorDeleteStart: false,
-      isColorDeleteSuccess: false,
-      isColorDeleteFailure: true,
-      errorMessage: payload.data
-    }),
+    [colorDeleteFailure]: (state, {payload}) => {
+      return {
+        ...state,
+        isColorDeleteStart: false,
+        isColorDeleteSuccess: false,
+        isColorDeleteFailure: true,
+        errorMessage: payload
+      }
+    },
 
     [colorUpdateStart]: (state) => ({
       ...state,

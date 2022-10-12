@@ -45,6 +45,7 @@ const reducer = handleActions({
        isProductCreatedStart: true,
        isProductCreatedSuccess: false,
        isProductCreatedFailure: false,
+       errorMessage: ''
      }
     },
 
@@ -58,14 +59,17 @@ const reducer = handleActions({
       }
     },
 
-    [productCreateFailure]: (state, {payload}) => ({
-      ...state,
-      isProductCreatedStart: false,
-      isProductCreatedSuccess: false,
-      isProductCreatedFailure: true,
-      errorMessage: payload.data
+    [productCreateFailure]: (state, {payload}) => {
+      console.log('payload',payload)
+      return {
+        ...state,
+        isProductCreatedStart: false,
+        isProductCreatedSuccess: false,
+        isProductCreatedFailure: true,
+        errorMessage: payload
 
-    }),
+      }
+    },
     [productUpdateStart]: (state) => ({
       ...state,
       isProductUpdatedStart: true,

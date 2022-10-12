@@ -57,6 +57,7 @@ const reducer = handleActions(
       isRegisterData: false,
       isRegisterSuccess: true,
       data: payload,
+      errorMessage: ''
 
     }),
     [getRegisterFailure]: (state, {payload}) => {

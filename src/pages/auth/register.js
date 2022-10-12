@@ -5,6 +5,8 @@ import {getRegisterStart} from "../../redux/user/actions";
 import {useNavigate, Link} from "react-router-dom";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import {Toastify} from "../../components/toasterror";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const [icon, setIcon] = useState({
@@ -20,9 +22,19 @@ const SignUp = () => {
   })
   const [isDisabled, setIsDisabled] = useState(false)
   const dispatch = useDispatch()
-  const {isRegisterFailure, isRegisterSuccess, errorMessage} = useSelector(state => state.user)
-  const [message, setMessage] = useState(errorMessage)
+  const {isRegisterSuccess, errorMessage} = useSelector(state => state.user)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (errorMessage) {
+      Toastify(errorMessage, 'error')
+    }
+    if (isRegisterSuccess) {
+      Swal.fire('register  success!')
+      navigate("/login")
+    }
+  }, [errorMessage, isRegisterSuccess])
+
 
   const handleClick = async (e) => {
     e.preventDefault()
@@ -30,23 +42,17 @@ const SignUp = () => {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
-      password: data.password
+      password: data.password,
+      confirmPassword: data.confirmPassword
     }
-    if (data.password.length >= 8) {
-      if (data.password === data.confirmPassword) {
-        dispatch(getRegisterStart({user: user}))
-      } else {
-        setMessage("confirm password is wrong")
-      }
-    } else {
-      setMessage("password must be min 8 digits")
-    }
+
+    dispatch(getRegisterStart({user: user}))
   }
 
-  useEffect(()=> {
-    if (!data.firstName){
+  useEffect(() => {
+    if (!data.firstName) {
       setIsDisabled(true)
-    }else {
+    } else {
       setIsDisabled(false)
     }
   }, [data])
@@ -57,19 +63,6 @@ const SignUp = () => {
       [field]: value
     }))
   }
-
-  useEffect(() => {
-    if (isRegisterSuccess) {
-      alert("Register Success")
-      navigate("/login")
-    }
-  }, [isRegisterSuccess, navigate])
-
-  useEffect(() => {
-    if (isRegisterFailure) {
-      setMessage(errorMessage)
-    }
-  }, [isRegisterFailure, errorMessage])
 
 
   const handleChangeIcon = (field, value) => {
@@ -134,11 +127,11 @@ const SignUp = () => {
               {icon.confirmPassword ? <RemoveRedEyeIcon/> : <VisibilityOffIcon/>}
             </div>
           </div>
-          <button disabled={!data.firstName} className={isDisabled ? 'disabled' : 'button'} type="submit">Submit</button>
+          <button disabled={!data.firstName} className={isDisabled ? 'disabled' : 'button'} type="submit">Submit
+          </button>
 
 
           <Link to="/login" style={{textDecoration: "none", color: "blue", fontWeight: "600"}}>signIn</Link>
-          <div style={{color: "red"}}>{message}</div>
         </form>
       </div>
     </>

@@ -1,16 +1,29 @@
-import React, {useRef, useState} from 'react';
-import {useDispatch} from "react-redux";
+import React, {useEffect, useRef, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import {
-  colorCreateSuccess,
   colorStartCreate,
 } from "../../redux/color/actions";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
+import {Toastify} from "../../components/toasterror";
+import Swal from "sweetalert2";
 
 const AddColor = () => {
   const colorName = useRef()
   const [err, setErr] = useState(false)
   const dispatch = useDispatch()
+const {errorMessage, isColorCreatedSuccess} = useSelector(state => state.color)
+
+  useEffect(() => {
+    if(errorMessage) {
+      Toastify(errorMessage, 'error')
+    }
+    if(isColorCreatedSuccess) {
+      Swal.fire("Color created success!")
+    }
+  }, [errorMessage, isColorCreatedSuccess])
+
+
 
   const handleCreateColor = () => {
     let color = {
@@ -18,9 +31,7 @@ const AddColor = () => {
     }
     if (colorName.current.value) {
       dispatch(colorStartCreate({color}))
-      if (colorCreateSuccess()) {
-        alert("color has been created")
-      }
+
     }
     if (!colorName.current.value) {
       setErr(true)

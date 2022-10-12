@@ -3,6 +3,9 @@ import {productDeleteStart, productUpdateStart, productUpdateSuccess} from "../r
 import {useDispatch, useSelector} from "react-redux";
 import './style.scss'
 import {colorDeleteStart, getColorStart} from "../redux/color/actions";
+import Swal from "sweetalert2";
+import {Toastify} from "./toasterror";
+import usePrevious from "../hooks/usePrevious";
 
 const Modal = ({item}) => {
   const [product, setProduct] = useState({
@@ -13,9 +16,9 @@ const Modal = ({item}) => {
   const checked = useRef()
   const [updateColors, setUpdateColors] = useState({})
   const dispatch = useDispatch()
-  const {oneProduct} = useSelector(state => state.product)
+  const {oneProduct, isProductUpdatedSuccess, errorMessage} = useSelector(state => state.product)
   const {colorData} = useSelector(state => state.color)
-
+  const prevIsProductUpdateSuccess = usePrevious(isProductUpdatedSuccess)
   useEffect(() => {
     setProduct({
       ...product,
@@ -23,6 +26,15 @@ const Modal = ({item}) => {
       colors: oneProduct?.colors,
     })
   }, [oneProduct])
+
+  useEffect(() => {
+    if (errorMessage) {
+      Toastify(errorMessage, 'error')
+    }
+    if (isProductUpdatedSuccess && prevIsProductUpdateSuccess === false) {
+      Swal.fire('Product updated!')
+    }
+  }, [isProductUpdatedSuccess])
 
   useEffect(() => {
     dispatch(getColorStart())
@@ -36,10 +48,6 @@ const Modal = ({item}) => {
       newColor: product.newColors
     }
     dispatch(productUpdateStart(payload))
-
-    if (productUpdateSuccess) {
-      alert("product has been updated")
-    }
 
     if (checked.current) {
       handleDelete(checked.current.value)
