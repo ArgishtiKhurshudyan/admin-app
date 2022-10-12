@@ -25,7 +25,7 @@ const Modal = ({item}) => {
       productName: oneProduct?.productName,
       colors: oneProduct?.colors,
     })
-  }, [oneProduct, product])
+  }, [oneProduct])
 
   useEffect(() => {
     if (errorMessage) {
