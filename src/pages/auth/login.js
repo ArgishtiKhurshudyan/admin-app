@@ -16,8 +16,7 @@ const SignIn = () => {
   });
   const [closeIcon, setCloseIcon] = useState(false)
   const navigate = useNavigate()
-  const {isLoginStart, isLoginSuccess, isLoginFailure, errorMessage} = useSelector(state => state.user)
-  // const [message, setMessage] = useState(errorMessage)
+  const {isLoginStart, isLoginSuccess, errorMessage} = useSelector(state => state.user)
   const dispatch = useDispatch();
 
 
@@ -39,12 +38,6 @@ const SignIn = () => {
       navigate("/product")
     }
   }
-
-  // useEffect(() => {
-  //   if (isLoginFailure) {
-  //     setMessage(errorMessage);
-  //   }
-  // }, [isLoginFailure, errorMessage])
 
   const handleClickIcon = (e) => {
     setCloseIcon(!closeIcon)

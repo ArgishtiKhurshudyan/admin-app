@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {productDeleteStart, productUpdateStart, productUpdateSuccess} from "../redux/product/actions";
+import {productUpdateStart} from "../redux/product/actions";
 import {useDispatch, useSelector} from "react-redux";
 import './style.scss'
 import {colorDeleteStart, getColorStart} from "../redux/color/actions";
@@ -25,7 +25,7 @@ const Modal = ({item}) => {
       productName: oneProduct?.productName,
       colors: oneProduct?.colors,
     })
-  }, [oneProduct])
+  }, [oneProduct, product])
 
   useEffect(() => {
     if (errorMessage) {
@@ -34,7 +34,7 @@ const Modal = ({item}) => {
     if (isProductUpdatedSuccess && prevIsProductUpdateSuccess === false) {
       Swal.fire('Product updated!')
     }
-  }, [isProductUpdatedSuccess])
+  }, [isProductUpdatedSuccess, errorMessage, prevIsProductUpdateSuccess])
 
   useEffect(() => {
     dispatch(getColorStart())
@@ -68,20 +68,7 @@ const Modal = ({item}) => {
 
     }))
 
-    // if (value.checked){
-    //   product.colors.push({colorName:value.name, id:value.id})
-    // }
   }
-
-  // const handleChangeColor = (value) => {
-  //   if (value.checked) {
-  //     value.name.map((name)=> {
-  //       // product.newColor = name
-  //
-  //     })
-  //   }
-  // }
-
   const handleDelete = (id) => {
     dispatch(colorDeleteStart({id: id}))
   }

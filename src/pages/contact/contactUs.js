@@ -4,9 +4,9 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import ColorButtons from "../../muitable/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {messageCreateSuccess, messageStartCreate} from "../../redux/contactus/actions";
+import {messageStartCreate} from "../../redux/contactus/actions";
 import {useNavigate} from "react-router-dom";
-import message from "../../redux/contactus/saga";
+// import message from "../../redux/contactus/saga";
 import {Toastify} from "../../components/toasterror";
 import Swal from "sweetalert2";
 import usePrevious from "../../hooks/usePrevious";
@@ -21,15 +21,16 @@ const ContactUs = () => {
   const {errorMessage, isMessageCreatedSuccess} = useSelector(state => state.message)
   const navigate = useNavigate()
   const prevIsMessage = usePrevious(isMessageCreatedSuccess)
+  // const prevIsMessageError = usePrevious(errorMessage)
   useEffect(() => {
-    if (errorMessage) {
+    if (errorMessage ) {
       Toastify(errorMessage, 'error')
     }
     if (isMessageCreatedSuccess && prevIsMessage === false) {
       Swal.fire('Message send success!')
       navigate("/")
     }
-  }, [errorMessage, isMessageCreatedSuccess])
+  }, [errorMessage, isMessageCreatedSuccess, navigate, prevIsMessage])
 
   const handleCreate = () => {
     const messages = {
@@ -37,9 +38,8 @@ const ContactUs = () => {
       email: message.email,
       message: message.message
     }
-    if (message.username && message.email && message.message) {
       dispatch(messageStartCreate({messages}))
-    }
+
   }
 
   const handleChange = (field, value) => {

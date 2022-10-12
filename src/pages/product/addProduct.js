@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getProductStart, productCreateSuccess, productStartCreate} from "../../redux/product/actions";
+import {getProductStart,  productStartCreate} from "../../redux/product/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {getColorStart} from "../../redux/color/actions";
 import Sidebar from "../../components/sidebar/Sidebar";

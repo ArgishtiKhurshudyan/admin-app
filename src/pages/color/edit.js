@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import {colorDeleteStart, colorUpdateStart, colorUpdateSuccess, findColorRequest} from "../../redux/color/actions";
+import {colorDeleteStart, colorUpdateStart, findColorRequest} from "../../redux/color/actions";
 import Confirmation from "../../components/confirmation";
 import {Toastify} from "../../components/toasterror";
 import Swal from "sweetalert2";
@@ -46,7 +46,7 @@ const EditColor = () => {
       navigate('/colors')
     }
 
-  }, [errorMessage,  isColorUpdateSuccess, isColorDeleteSuccess, navigate])
+  }, [errorMessage,  isColorUpdateSuccess, isColorDeleteSuccess, navigate,prevIsColorDeleteSuccess, prevIsColorUpdateSuccess])
 
   const handleConfirm = (isConfirm, value) => {
     if (isConfirm) {

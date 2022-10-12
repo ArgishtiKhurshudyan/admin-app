@@ -33,7 +33,7 @@ const SignUp = () => {
       Swal.fire('register  success!')
       navigate("/login")
     }
-  }, [errorMessage, isRegisterSuccess])
+  }, [errorMessage, isRegisterSuccess, navigate])
 
 
   const handleClick = async (e) => {
