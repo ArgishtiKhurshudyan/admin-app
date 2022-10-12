@@ -42,7 +42,7 @@ const reducer = handleActions({
       isMessageCreatedStart: false,
       isMessageCreatedSuccess: false,
       isMessageCreatedFailure: true,
-      errorMessage: payload.data
+      errorMessage: payload
     }),
   },
   initialState
