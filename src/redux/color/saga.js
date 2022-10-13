@@ -40,7 +40,6 @@ function* updateColor({payload}) {
     if (response?.status === 200) {
       yield put(colorUpdateSuccess(response.data));
     }
-    console.log("response", response)
   } catch (e) {
     if (e?.response?.data) {
       yield put(colorUpdateFailure(e?.response?.data?.message));
@@ -80,7 +79,6 @@ function*  findOneColor({ payload }) {
     if (response?.status === 200) {
       yield put(findColorSuccess(response.data.color));
     }
-    console.log("response", response)
   } catch (e) {
     if (e?.response?.data) {
       yield put(findColorFailure(e?.response?.data?.message));

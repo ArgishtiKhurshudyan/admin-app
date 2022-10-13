@@ -77,7 +77,6 @@ const prevIsCreateProduct = usePrevious(isProductCreatedSuccess)
   return (
     <div className='product'>
       <Sidebar/>
-
       <div className="product-container">
         <Navbar/>
       <div className="product-container-create">

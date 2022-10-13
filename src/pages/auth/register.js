@@ -129,8 +129,6 @@ const SignUp = () => {
           </div>
           <button disabled={!data.firstName} className={isDisabled ? 'disabled' : 'button'} type="submit">Submit
           </button>
-
-
           <Link to="/login" style={{textDecoration: "none", color: "blue", fontWeight: "600"}}>signIn</Link>
         </form>
       </div>

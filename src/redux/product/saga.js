@@ -21,7 +21,6 @@ import {
 const token = localStorage.getItem('access_token')
 
 function* createProduct({payload}) {
-  console.log('payload', payload)
   try {
     const response = yield call(() => axios.post("http://localhost:5000/api/product", payload.product,   {headers: {"authorization": `Bearer ${token}`}}))
       if (response?.status === 200) {
@@ -29,7 +28,6 @@ function* createProduct({payload}) {
     }
   } catch (e) {
     if (e?.response?.data) {
-      // console.log("e?.response?.data", e?.response?.data)
       yield put(productCreateFailure(e?.response?.data?.message));
     }
   }
