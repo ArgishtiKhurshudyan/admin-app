@@ -7,35 +7,39 @@
     color: #7451f8;
     margin: 5px;
   }
+
   span {
-    color:#7451f8;
+    color: #7451f8;
     margin: 4px;
   }
+
   input {
     width: 130px;
     border: none;
     outline: #545353;
     margin: 5px;
-     }
-.update {
-  width: 100px;
-  margin-left: 87.2%;
-  background-color: transparent;
-  border: 1px solid #e7e7ec;
-  transition: 1s ease;
-
-  &:hover {
-    background-color: #2d2b2b;
-    color: white;
   }
-}
+
+  .update {
+    width: 100px;
+    margin-left: 87.2%;
+    background-color: transparent;
+    border: 1px solid #e7e7ec;
+    transition: 1s ease;
+
+    &:hover {
+      background-color: #2d2b2b;
+      color: white;
+    }
+  }
 
   .inp-product-update {
     display: flex;
     align-items: center;
 
   }
-  .color-div{
+
+  .color-div {
     //position: absolute;
     margin-left: 480px;
   }
@@ -44,7 +48,7 @@
     background-color: #3a3a3a;
     width: 300px;
 
-    label{
+    label {
       color: wheat;
       width: 90px;
       text-align: center;

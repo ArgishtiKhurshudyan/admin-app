@@ -1,6 +1,4 @@
 import {handleActions} from 'redux-actions';
-
-
 import {
   messageStartCreate,
   messageCreateFailure,

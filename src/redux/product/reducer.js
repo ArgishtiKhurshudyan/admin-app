@@ -40,13 +40,13 @@ const initialState = {
 
 const reducer = handleActions({
     [productStartCreate]: (state) => {
-     return {
-       ...state,
-       isProductCreatedStart: true,
-       isProductCreatedSuccess: false,
-       isProductCreatedFailure: false,
-       errorMessage: ''
-     }
+      return {
+        ...state,
+        isProductCreatedStart: true,
+        isProductCreatedSuccess: false,
+        isProductCreatedFailure: false,
+        errorMessage: ''
+      }
     },
 
     [productCreateSuccess]: (state, {payload}) => {
@@ -106,8 +106,7 @@ const reducer = handleActions({
         isProductDeletedSuccess: true,
         isProductDeletedFailure: false,
         data: state.data.filter(i => i.id !== payload.id),
-    }
-
+      }
     },
     [productDeleteFailure]: (state, {payload}) => ({
       ...state,

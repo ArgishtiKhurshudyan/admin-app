@@ -1,7 +1,9 @@
 const Confirmation = (
   {
     message = "Are you sure?",
-    handleConfirm = () => {},
+    handleConfirm = () => {
+    },
+
     isOpen = false,
     setIsOpen,
     value = null,

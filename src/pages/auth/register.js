@@ -45,7 +45,6 @@ const SignUp = () => {
       password: data.password,
       confirmPassword: data.confirmPassword
     }
-
     dispatch(getRegisterStart({user: user}))
   }
 
@@ -63,7 +62,6 @@ const SignUp = () => {
       [field]: value
     }))
   }
-
 
   const handleChangeIcon = (field, value) => {
     setIcon(prevState => ({

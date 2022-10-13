@@ -53,14 +53,14 @@ function* deleteColor({payload}) {
     if (response?.status === 200) {
       yield put(colorDeleteSuccess(response.data));
     }
-    } catch (e) {
+  } catch (e) {
     if (e?.response?.data) {
       yield put(colorDeleteFailure(e?.response?.data?.message));
     }
   }
 }
 
-function* getColors({payload}) {
+function* getColors({}) {
   try {
     const response = yield call(() => axios.get(" http://localhost:5000/api/color", {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {
@@ -73,7 +73,7 @@ function* getColors({payload}) {
   }
 }
 
-function*  findOneColor({ payload }) {
+function* findOneColor({payload}) {
   try {
     const response = yield call(() => axios.get(`http://localhost:5000/api/color/find/${payload}`, {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {

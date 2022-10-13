@@ -7,7 +7,6 @@ import {getLoginStart} from "../../redux/user/actions";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import {Toastify} from "../../components/toasterror";
-import Swal from "sweetalert2";
 
 const SignIn = () => {
   const [credentials, setCredentials] = useState({
@@ -19,9 +18,7 @@ const SignIn = () => {
   const {isLoginStart, isLoginSuccess, errorMessage} = useSelector(state => state.user)
   const dispatch = useDispatch();
 
-
-
-  useEffect(()=> {
+  useEffect(() => {
     if (errorMessage) {
       Toastify(errorMessage, 'error')
     }
@@ -42,6 +39,7 @@ const SignIn = () => {
   const handleClickIcon = (e) => {
     setCloseIcon(!closeIcon)
   }
+
   return (
     <div className="register-container">
       <form onSubmit={handleClick} className="register-form">
@@ -69,7 +67,6 @@ const SignIn = () => {
         <Link to="/register" style={{width: "90px"}}>
           <button className="signUp-btn button">signUp</button>
         </Link>
-        {/*<div style={{color: 'red'}}>{message}</div>*/}
       </form>
 
     </div>

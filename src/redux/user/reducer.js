@@ -43,7 +43,6 @@ const reducer = handleActions(
         isLoginFailure: true,
         errorMessage: payload
       }
-
     },
     [getRegisterStart]: (state) => ({
       ...state,
@@ -67,7 +66,6 @@ const reducer = handleActions(
         isRegisterSuccess: false,
         isRegisterFailure: true,
         errorMessage: payload
-
       }
     },
   },

@@ -5,10 +5,11 @@ import Navbar from "../../components/navbar/Navbar";
 import ColorsTable from "../../bootstrap/tablecolors";
 import QueueIcon from '@mui/icons-material/Queue';
 import {useNavigate} from "react-router-dom";
+
 const Color = () => {
 
-const navigate = useNavigate()
-  const handleClick = (id) => {
+  const navigate = useNavigate()
+  const handleClick = () => {
     navigate(`/color-add`)
   }
   return (

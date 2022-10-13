@@ -15,15 +15,14 @@ import usePrevious from "../../hooks/usePrevious";
 const EditColor = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isEditing, setIsEditing] = useState()
-  const [color, setColor] = useState({
-    colorName: ''
-  })
+  const [color, setColor] = useState({colorName: ''})
   const {id} = useParams();
   const dispatch = useDispatch()
   const {oneColor, errorMessage, isColorDeleteSuccess, isColorUpdateSuccess} = useSelector(state => state.color)
   const navigate = useNavigate()
   const prevIsColorDeleteSuccess = usePrevious(isColorDeleteSuccess)
   const prevIsColorUpdateSuccess = usePrevious(isColorUpdateSuccess)
+
   useEffect(() => {
     dispatch(findColorRequest(id))
   }, [dispatch, id])
@@ -45,8 +44,7 @@ const EditColor = () => {
       Swal.fire('Color deleted!')
       navigate('/colors')
     }
-
-  }, [errorMessage,  isColorUpdateSuccess, isColorDeleteSuccess, navigate,prevIsColorDeleteSuccess, prevIsColorUpdateSuccess])
+  }, [errorMessage, isColorUpdateSuccess, isColorDeleteSuccess, navigate, prevIsColorDeleteSuccess, prevIsColorUpdateSuccess])
 
   const handleConfirm = (isConfirm, value) => {
     if (isConfirm) {

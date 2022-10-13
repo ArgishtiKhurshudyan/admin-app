@@ -12,17 +12,16 @@ const AddColor = () => {
   const colorName = useRef()
   const [err, setErr] = useState(false)
   const dispatch = useDispatch()
-const {errorMessage, isColorCreatedSuccess} = useSelector(state => state.color)
+  const {errorMessage, isColorCreatedSuccess} = useSelector(state => state.color)
 
   useEffect(() => {
-    if(errorMessage) {
+    if (errorMessage) {
       Toastify(errorMessage, 'error')
     }
-    if(isColorCreatedSuccess) {
+    if (isColorCreatedSuccess) {
       Swal.fire("Color created success!")
     }
   }, [errorMessage, isColorCreatedSuccess])
-
 
 
   const handleCreateColor = () => {
@@ -31,7 +30,6 @@ const {errorMessage, isColorCreatedSuccess} = useSelector(state => state.color)
     }
     if (colorName.current.value) {
       dispatch(colorStartCreate({color}))
-
     }
     if (!colorName.current.value) {
       setErr(true)
@@ -48,17 +46,17 @@ const {errorMessage, isColorCreatedSuccess} = useSelector(state => state.color)
         <Navbar/>
         <div className="create-container">
           <div className="colors">
-            <h5 style={{color:"wheat"}}>Create color</h5>
-          <div className="inp-div">
-            <input
-              type="text"
-              ref={colorName}
-              placeholder="create color"
-              className={err && "error"}
-              required
-            />
-            <button onClick={handleCreateColor}>Add color</button>
-          </div>
+            <h5 style={{color: "wheat"}}>Create color</h5>
+            <div className="inp-div">
+              <input
+                type="text"
+                ref={colorName}
+                placeholder="create color"
+                className={err && "error"}
+                required
+              />
+              <button onClick={handleCreateColor}>Add color</button>
+            </div>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import createDebounce from 'redux-debounced';
 import rootReducer from '../redux/rootReducer';
 import rootSaga from '../redux/rootSaga';
-import { createStore, applyMiddleware, compose } from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 // create the saga middleware
@@ -24,4 +24,4 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
-export { store };
+export {store};

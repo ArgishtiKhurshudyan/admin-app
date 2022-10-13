@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 
 const Product = () => {
   const navigate = useNavigate()
-  const handleClick = (id) => {
+  const handleClick = () => {
     navigate(`/product-add`)
   }
   return (

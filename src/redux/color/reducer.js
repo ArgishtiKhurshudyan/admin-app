@@ -61,13 +61,13 @@ const reducer = handleActions({
     },
 
     [colorCreateFailure]: (state, {payload}) => {
-     return {
-       ...state,
-       isColorCreatedStart: false,
-       isColorCreatedSuccess: false,
-       isColorCreatedFailure: true,
-       errorMessage: payload
-     }
+      return {
+        ...state,
+        isColorCreatedStart: false,
+        isColorCreatedSuccess: false,
+        isColorCreatedFailure: true,
+        errorMessage: payload
+      }
     },
 
     [colorDeleteStart]: (state) => ({

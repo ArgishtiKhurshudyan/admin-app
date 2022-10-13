@@ -18,12 +18,13 @@ import {
   productUpdateStart,
   productUpdateSuccess
 } from "./actions"
+
 const token = localStorage.getItem('access_token')
 
 function* createProduct({payload}) {
   try {
-    const response = yield call(() => axios.post("http://localhost:5000/api/product", payload.product,   {headers: {"authorization": `Bearer ${token}`}}))
-      if (response?.status === 200) {
+    const response = yield call(() => axios.post("http://localhost:5000/api/product", payload.product, {headers: {"authorization": `Bearer ${token}`}}))
+    if (response?.status === 200) {
       yield put(productCreateSuccess(response.data.data));
     }
   } catch (e) {
@@ -32,9 +33,10 @@ function* createProduct({payload}) {
     }
   }
 }
+
 function* deleteProduct({payload}) {
   try {
-    const response = yield call(() => axios.delete(`http://localhost:5000/api/product/${payload.id}`,{headers: {"authorization": `Bearer ${token}`}} ))
+    const response = yield call(() => axios.delete(`http://localhost:5000/api/product/${payload.id}`, {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {
       yield put(productDeleteSuccess(payload));
     }
@@ -44,6 +46,7 @@ function* deleteProduct({payload}) {
     }
   }
 }
+
 function* updateProduct({payload}) {
   try {
     const response = yield call(() => axios.put(`http://localhost:5000/api/product/${payload.id}`, payload))
@@ -57,7 +60,7 @@ function* updateProduct({payload}) {
   }
 }
 
-function*  getProducts() {
+function* getProducts() {
   try {
     const response = yield call(() => axios.get("http://localhost:5000/api/product/products", {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {
@@ -70,7 +73,7 @@ function*  getProducts() {
   }
 }
 
-function*  findOneProduct({ payload }) {
+function* findOneProduct({payload}) {
   try {
     const response = yield call(() => axios.get(`http://localhost:5000/api/product/find/${payload}`, {headers: {"authorization": `Bearer ${token}`}}))
     if (response?.status === 200) {

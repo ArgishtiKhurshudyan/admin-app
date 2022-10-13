@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getProductStart,  productStartCreate} from "../../redux/product/actions";
+import {getProductStart, productStartCreate} from "../../redux/product/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {getColorStart} from "../../redux/color/actions";
 import Sidebar from "../../components/sidebar/Sidebar";
@@ -20,15 +20,15 @@ const AddProduct = () => {
   const dispatch = useDispatch();
   const {colorData} = useSelector(state => state.color)
   const {errorMessage, isProductCreatedSuccess} = useSelector(state => state.product)
-const prevIsCreateProduct = usePrevious(isProductCreatedSuccess)
+  const prevIsCreateProduct = usePrevious(isProductCreatedSuccess)
   useEffect(() => {
-    if(errorMessage) {
+    if (errorMessage) {
       Toastify(errorMessage, 'error')
     }
-    if(isProductCreatedSuccess && prevIsCreateProduct === false) {
+    if (isProductCreatedSuccess && prevIsCreateProduct === false) {
       Swal.fire('Product created success!')
     }
-  }, [errorMessage, isProductCreatedSuccess,prevIsCreateProduct])
+  }, [errorMessage, isProductCreatedSuccess, prevIsCreateProduct])
 
 
   useEffect(() => {
@@ -79,35 +79,35 @@ const prevIsCreateProduct = usePrevious(isProductCreatedSuccess)
       <Sidebar/>
       <div className="product-container">
         <Navbar/>
-      <div className="product-container-create">
-        <div className="product-create">
-          <h5>Create product</h5>
-          <input
-            type="text"
-            placeholder="product name"
-            value={formData['productName']}
-            required
-            className={err && "error"}
-            onChange={(e) => handleChange('productName', e.target.value)}
-          />
-          <button className="create-btn-prod" onClick={handleCreate}>create</button>
-        </div>
-        <div className="colors-div">
-          <h5>Select product color</h5>
-          {colorData?.map((item) => (
-            <div className="select-color-container">
-              <button id={item.id} className={isClick && ""} onClick={(e) => {
-                addActiveColor(item)
-                formData.colors.push(item.id)
-              }}
-              >
-                {item.colorName}
-              </button>
-            </div>
-          ))}
+        <div className="product-container-create">
+          <div className="product-create">
+            <h5>Create product</h5>
+            <input
+              type="text"
+              placeholder="product name"
+              value={formData['productName']}
+              required
+              className={err && "error"}
+              onChange={(e) => handleChange('productName', e.target.value)}
+            />
+            <button className="create-btn-prod" onClick={handleCreate}>create</button>
+          </div>
+          <div className="colors-div">
+            <h5>Select product color</h5>
+            {colorData?.map((item) => (
+              <div className="select-color-container">
+                <button id={item.id} className={isClick && ""} onClick={(e) => {
+                  addActiveColor(item)
+                  formData.colors.push(item.id)
+                }}
+                >
+                  {item.colorName}
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };

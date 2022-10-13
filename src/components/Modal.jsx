@@ -113,7 +113,6 @@ const Modal = ({item}) => {
                   value={product.colors[index]?.colorName}
                   onChange={(e) => handleChange("colors", e.target.value, item.id)}
                 />
-                {/*<input ref={checked} value={item.id} type="checkbox" /> <label>del</label>*/}
               </div>
             )
           })

@@ -6,14 +6,14 @@ const routes = [
     id: 1,
     key: "login",
     path: '/login',
-    component: <SignIn />,
+    component: <SignIn/>,
     permissions: []
   },
   {
     id: 2,
     key: "register",
     path: '/register',
-    component: <SignUp />,
+    component: <SignUp/>,
     permissions: []
   },
 ]

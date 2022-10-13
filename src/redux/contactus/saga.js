@@ -6,7 +6,9 @@ import {
   messageCreateFailure,
   messageCreateSuccess,
 } from "./actions"
+
 const token = localStorage.getItem('access_token')
+
 function* createMessage({payload}) {
   try {
     const response = yield call(() => axios.post("http://localhost:5000/api/message", payload.messages, {headers: {"authorization": `Bearer ${token}`}}))

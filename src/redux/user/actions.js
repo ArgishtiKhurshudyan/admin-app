@@ -1,6 +1,5 @@
 import {createAction} from 'redux-actions';
 
-
 export const getLoginStart = createAction(
   'LOGIN_START'
 );
