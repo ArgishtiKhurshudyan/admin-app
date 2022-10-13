@@ -60,7 +60,6 @@ const reducer = handleActions({
     },
 
     [productCreateFailure]: (state, {payload}) => {
-      console.log('payload',payload)
       return {
         ...state,
         isProductCreatedStart: false,
@@ -125,9 +124,6 @@ const reducer = handleActions({
     }),
 
     [getProductSuccess]: (state, {payload}) => {
-      // const x = payload?.products.map((i)=> i.colors)
-      // x?.map((id)=>id?.[0].id !== id)
-      // console.log("oneproduct", )
       return {
         ...state,
         isProductGetStart: false,

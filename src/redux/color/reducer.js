@@ -105,7 +105,6 @@ const reducer = handleActions({
     }),
 
     [colorUpdateSuccess]: (state, {payload}) => {
-      console.log('payload', payload)
       return {
         ...state,
         isColorUpdateStart: false,
@@ -172,8 +171,3 @@ const reducer = handleActions({
 )
 
 export default reducer;
-
-//
-// const updated = [...state.colorData]
-// const updatedIndex = state.colorData.findIndex((el) => el.id === payload.id)
-// updated[updatedIndex] = {...updated[updatedIndex], ...payload}
